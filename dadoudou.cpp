@@ -19,6 +19,8 @@
 //Macro defines
 #define COLOR_NONE					10									//no doudou
 #define COLOR_TYPE_MAX				10									//types of doudou's color
+#define COLOR_VISIBLE				1									//visible means show it in screen
+#define COLOR_INVISIBLE				0									//invisible means not show in screen
 #define ROW_MAX 					17									//row max, horizontal --
 #define LINE_MAX 					23									//line max, vertical  |
 
@@ -180,7 +182,7 @@ int GetColor(int row,int line)
 	if there is doudou,
 	return the color data.
 	*/
-	if(grid[row][line].isDisplay==0)
+	if(grid[row][line].isDisplay==COLOR_INVISIBLE)
 	{
 		return COLOR_NONE;
 	}

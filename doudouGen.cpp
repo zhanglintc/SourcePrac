@@ -7,6 +7,8 @@ Generate the doudou Game
 
 #define COLOR_GEN_NONE				10									//doudou color from 0 to 9. 10 means no color. different from dadoudou.cpp
 #define COLOR_TYPE_MAX				10									//types of doudou's color
+#define COLOR_VISIBLE				1									//visible means show it in screen
+#define COLOR_INVISIBLE				0									//invisible means not show in screen
 #define ROW_MAX 					17									//row max, horizontal --
 #define LINE_MAX 					23									//line max, vertical  |
 
@@ -59,7 +61,7 @@ void douProcess(int rowIn, int lineIn)	//this is used to handle things after Dad
 					printf("¡|");
 					continue;
 				}
-				if(grid[row][line].isDisplay==0)					//if undiplay, print space
+				if(grid[row][line].isDisplay==COLOR_INVISIBLE)					//if undiplay, print space
 				{
 					printf("  |");									//space
 					continue;
@@ -101,10 +103,10 @@ void douClick(int row, int line)
 //----------------------------------------------------------------4 points gain«
 	if(colorUp==colorRi && colorRi==colorDo && colorDo==colorLe && colorUp!=COLOR_GEN_NONE)
 	{
-		grid[rowUp][lineUp].isDisplay=0;
-		grid[rowRi][lineRi].isDisplay=0;
-		grid[rowDo][lineDo].isDisplay=0;
-		grid[rowLe][lineLe].isDisplay=0;
+		grid[rowUp][lineUp].isDisplay=COLOR_INVISIBLE;
+		grid[rowRi][lineRi].isDisplay=COLOR_INVISIBLE;
+		grid[rowDo][lineDo].isDisplay=COLOR_INVISIBLE;
+		grid[rowLe][lineLe].isDisplay=COLOR_INVISIBLE;
 		score+=4;
 		counted=1;
 	}
@@ -113,25 +115,25 @@ void douClick(int row, int line)
 //----------------------------------------------------------------3 points gain«
 	if(colorUp==colorRi && colorRi==colorDo && colorUp!=COLOR_GEN_NONE)
 	{
-		grid[rowUp][lineUp].isDisplay=0;
-		grid[rowRi][lineRi].isDisplay=0;
-		grid[rowDo][lineDo].isDisplay=0;
+		grid[rowUp][lineUp].isDisplay=COLOR_INVISIBLE;
+		grid[rowRi][lineRi].isDisplay=COLOR_INVISIBLE;
+		grid[rowDo][lineDo].isDisplay=COLOR_INVISIBLE;
 		score+=3;
 		counted=1;
 	}
 	if(colorUp==colorDo && colorDo==colorLe && colorUp!=COLOR_GEN_NONE)
 	{
-		grid[rowUp][lineUp].isDisplay=0;
-		grid[rowDo][lineDo].isDisplay=0;
-		grid[rowLe][lineLe].isDisplay=0;
+		grid[rowUp][lineUp].isDisplay=COLOR_INVISIBLE;
+		grid[rowDo][lineDo].isDisplay=COLOR_INVISIBLE;
+		grid[rowLe][lineLe].isDisplay=COLOR_INVISIBLE;
 		score+=3;
 		counted=1;
 	}
 	if(colorRi==colorDo && colorDo==colorLe && colorRi!=COLOR_GEN_NONE)
 	{
-		grid[rowRi][lineRi].isDisplay=0;
-		grid[rowDo][lineDo].isDisplay=0;
-		grid[rowLe][lineLe].isDisplay=0;
+		grid[rowRi][lineRi].isDisplay=COLOR_INVISIBLE;
+		grid[rowDo][lineDo].isDisplay=COLOR_INVISIBLE;
+		grid[rowLe][lineLe].isDisplay=COLOR_INVISIBLE;
 		score+=3;
 		counted=1;
 	}
@@ -140,43 +142,43 @@ void douClick(int row, int line)
 //----------------------------------------------------------------2 points gain«
 	if(colorUp==colorRi && colorUp!=COLOR_GEN_NONE)
 	{
-		grid[rowUp][lineUp].isDisplay=0;
-		grid[rowRi][lineRi].isDisplay=0;
+		grid[rowUp][lineUp].isDisplay=COLOR_INVISIBLE;
+		grid[rowRi][lineRi].isDisplay=COLOR_INVISIBLE;
 		score+=2;
 		counted=1;
 	}
 	if(colorUp==colorDo && colorUp!=COLOR_GEN_NONE)
 	{
-		grid[rowUp][lineUp].isDisplay=0;
-		grid[rowDo][lineDo].isDisplay=0;
+		grid[rowUp][lineUp].isDisplay=COLOR_INVISIBLE;
+		grid[rowDo][lineDo].isDisplay=COLOR_INVISIBLE;
 		score+=2;
 		counted=1;
 	}
 	if(colorUp==colorLe && colorUp!=COLOR_GEN_NONE)
 	{
-		grid[rowUp][lineUp].isDisplay=0;
-		grid[rowLe][lineLe].isDisplay=0;
+		grid[rowUp][lineUp].isDisplay=COLOR_INVISIBLE;
+		grid[rowLe][lineLe].isDisplay=COLOR_INVISIBLE;
 		score+=2;
 		counted=1;
 	}
 	if(colorRi==colorDo && colorRi!=COLOR_GEN_NONE)
 	{
-		grid[rowRi][lineRi].isDisplay=0;
-		grid[rowDo][lineDo].isDisplay=0;
+		grid[rowRi][lineRi].isDisplay=COLOR_INVISIBLE;
+		grid[rowDo][lineDo].isDisplay=COLOR_INVISIBLE;
 		score+=2;
 		counted=1;
 	}
 	if(colorRi==colorLe && colorRi!=COLOR_GEN_NONE)
 	{
-		grid[rowRi][lineRi].isDisplay=0;
-		grid[rowLe][lineLe].isDisplay=0;
+		grid[rowRi][lineRi].isDisplay=COLOR_INVISIBLE;
+		grid[rowLe][lineLe].isDisplay=COLOR_INVISIBLE;
 		score+=2;
 		counted=1;
 	}
 	if(colorDo==colorLe && colorDo!=COLOR_GEN_NONE)
 	{
-		grid[rowDo][lineDo].isDisplay=0;
-		grid[rowLe][lineLe].isDisplay=0;
+		grid[rowDo][lineDo].isDisplay=COLOR_INVISIBLE;
+		grid[rowLe][lineLe].isDisplay=COLOR_INVISIBLE;
 		score+=2;
 		counted=1;
 	}
@@ -211,7 +213,7 @@ int upSe(int *row,int *line)
 {
 	for(*row;*row>=0;*row-=1)											//up search, to the first line
 	{
-		if(grid[*row][*line].isDisplay!=0)								//if there is doudou
+		if(grid[*row][*line].isDisplay!=COLOR_INVISIBLE)								//if there is doudou
 		{
 			return grid[*row][*line].color;								//return the color and back
 		}
@@ -223,7 +225,7 @@ int rightSe(int *row,int *line)
 {
 	for(*line;*line<LINE_MAX;*line+=1)									//right search, to the first line
 	{
-		if(grid[*row][*line].isDisplay!=0)								//if there is doudou
+		if(grid[*row][*line].isDisplay!=COLOR_INVISIBLE)								//if there is doudou
 		{
 			return grid[*row][*line].color;								//return the color and back
 		}
@@ -235,7 +237,7 @@ int downSe(int *row,int *line)
 {
 	for(*row;*row<ROW_MAX;*row+=1)										//down search, to the first line
 	{
-		if(grid[*row][*line].isDisplay!=0)								//if there is doudou
+		if(grid[*row][*line].isDisplay!=COLOR_INVISIBLE)								//if there is doudou
 		{
 			return grid[*row][*line].color;								//return the color and back
 		}
@@ -248,7 +250,7 @@ int leftSe(int *row,int *line)
 
 	for(*line;*line>=0;*line-=1)										//down search, to the first line
 	{
-		if(grid[*row][*line].isDisplay!=0)								//if there is doudou
+		if(grid[*row][*line].isDisplay!=COLOR_INVISIBLE)								//if there is doudou
 		{
 			return grid[*row][*line].color;								//return the color and back
 		}
@@ -301,7 +303,7 @@ void doudouInit()									//initial the game. show the first screen
 	{
 		for(line=0;line<23;line++)									//line from left to right
 		{
-			grid[row][line].isDisplay=1;
+			grid[row][line].isDisplay=COLOR_VISIBLE;
 		}
 	}
 
@@ -314,14 +316,14 @@ void doudouInit()									//initial the game. show the first screen
 		{
 			if(row==0||row==16)
 			{
-				grid[row][line].isDisplay=0;
+				grid[row][line].isDisplay=COLOR_INVISIBLE;
 				continue;
 			}
 			grid[row][line].color=randnum_list[23*(row-1)+line];		//set grid data
 			if(randnum_list[23*(row-1)+line]==COLOR_GEN_NONE)			//if data is 10, then set it as undisplay
 			{
 				//grid[row][line].color=0;							//useless. only for debug
-				grid[row][line].isDisplay=0;						//undisplay
+				grid[row][line].isDisplay=COLOR_INVISIBLE;						//undisplay
 			}
 		}
 	}
@@ -348,7 +350,7 @@ void doudouInit()									//initial the game. show the first screen
 			printf("%2d©  |",row+1);								//print the row number
 			for(line=0;line<23;line++)								//line from left to right
 			{
-				if(grid[row][line].isDisplay==0)					//if undiplay, print space
+				if(grid[row][line].isDisplay==COLOR_INVISIBLE)					//if undiplay, print space
 				{
 					printf("  |");									//space
 					continue;
