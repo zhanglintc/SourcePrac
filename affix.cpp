@@ -5,7 +5,7 @@
 /*******************************************************
 機能:return command and two parameters
 引数:char, char, char
-戻る値:なし 
+戻る値:なし
 *******************************************************/
 void GetCommand(char command[COMMAND_STR_LEN], char para_1st[COMMAND_STR_LEN], char para_2nd[COMMAND_STR_LEN])
 {
