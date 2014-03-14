@@ -187,11 +187,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\SourceFile\functions.h"
+				RelativePath=".\SourceFile\GRAPHICS.H"
 				>
 			</File>
 			<File
-				RelativePath=".\SourceFile\GRAPHICS.H"
+				RelativePath=".\SourceFile\headers.h"
 				>
 			</File>
 			<File
