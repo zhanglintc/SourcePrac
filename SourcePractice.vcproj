@@ -187,10 +187,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\SourceFile\GRAPHICS.H"
-				>
-			</File>
-			<File
 				RelativePath=".\SourceFile\headers.h"
 				>
 			</File>
