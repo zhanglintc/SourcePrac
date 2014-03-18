@@ -14,20 +14,14 @@ somewhere else and test it.
 2.affix.cpp:
 	Contains some frequent use tool functions.
 
-3.dadoudou.cpp:
-	Dadoudou game Plug-in.
-
-4.doudouGen.cpp
-	Dadoudou game main body.
-
-5.functions.cpp:
+3.functions.cpp:
 	Contains several functions.
 	Each function may has no relationship.
 	Each time I want to I want to test something,
 	I add a new function to here.
 
-6.header.h:
-	All the declarations and definations.
+4.header.h:
+	All the declarations and destinations.
 
-7.lex_1~3.cpp:
+5.lex_1~3.cpp:
 	iOS game woords' Plug-in function woords()'s lexicon library.
