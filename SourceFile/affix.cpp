@@ -203,11 +203,12 @@ Return		:int
 int Str2Int(char *data,int length)
 {
 	int ret=0;
-	//for(int i=0;i<length;i++)
-	//{
-	//	if(*(data+i)<48||*(data+i)>57)return ERROR_MARK;
-	//}
-	for(int i=length-1;i>=0;i--)
+	int i=0;
+	for(i=0;i<length;i++)
+	{
+		if(*(data+i)<48||*(data+i)>57)return ERROR_MARK;
+	}
+	for(i=length-1;i>=0;i--)
 	{
 		ret+=((*(data+length-1-i)-48)*((int)pow(10.0,(int)i)));
 	}

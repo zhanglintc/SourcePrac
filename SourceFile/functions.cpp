@@ -4,6 +4,48 @@
 
 //#include "lexicon.dat"
 
+void CallLastOne()
+{
+	char para_1st[COMMAND_STR_LEN];
+	char para_2nd[COMMAND_STR_LEN];
+	char para_3rd[COMMAND_STR_LEN];//Infact, useless, just to fill up the GetCommand()'s three parameters
+
+	memset(para_1st,'\0',sizeof(para_1st));											//initialize para_1st
+	memset(para_2nd,'\0',sizeof(para_2nd));											//initialize para_2nd
+	memset(para_3rd,'\0',sizeof(para_3rd));											//initialize para_3rd
+	
+	while(true)
+	{
+		printf("\nControlDock\\LastOne>(people,keys)");							//welcome words
+		GetCommand(para_1st,para_2nd,para_3rd);										//get input
+
+		if( Equal(para_1st,"-exit") || Equal(para_1st,"exit") )						//exit
+		{
+			break;
+		}
+		else if( Equal(para_1st,"") )												//invalid input
+		{
+			;																		//do nothing, out put another line
+		}
+		else if( Equal(para_1st,"cls") || Equal(para_1st,"-cls") )					//clean screen
+		{
+			system("cls");
+		}
+		else if( Str2Int(para_1st)==ERROR_MARK || Str2Int(para_2nd)==ERROR_MARK )	//invalid input
+		{
+			printf("Sorry, invalid input, please check and try again.\n");
+		}
+		else if( Str2Int(para_1st)==0 || Str2Int(para_2nd)==0 )						//invalid input(people and times cannot be 0)
+		{
+			printf("Sorry, invalid input, please check and try again.\n");
+		}
+		else
+		{
+			LastOne( Str2Int(para_1st),Str2Int(para_2nd) );							//call lastone
+		}
+	}
+}
+
 bool isTrips(Cards *card_1st, Cards *card_2nd, Cards *card_3rd)
 {
 	bool is_trips=false;
@@ -576,11 +618,16 @@ void ControlDock(void)
 			AB_Game();
 		}
 		
+		else if( Equal(command,"lastone") )
+		{
+			CallLastOne();
+		}
+		
 		//Not match any case, re-input
 		else
 		{
 			printf("Sorry, unknown command,\n");
-			printf("Please check your input and try again.\n\n");
+			printf("please check your input and try again.\n\n");
 		}
 	}
 }
@@ -997,7 +1044,7 @@ void LastOne(int numbers,int keys)//numbers is people's numbers, keys is the "de
 		printf("I'm No.%-3d %-2d times\n",pt->num,(i%keys)+(i%keys==0?keys:0));//report current person's number
 		if(i%keys==0)//kill this person
 		{
-			printf("No.%d has been killed\n",pt->num);//tell everyone this person has been killed
+			printf("No.%d has been killed\n\n",pt->num);//tell everyone this person has been killed
 			pp->next=pt->next;
 			//delete this data.
 			//pp is cache of pt.pp->next=pt->next means jump over pt,means delete this person

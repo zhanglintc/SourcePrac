@@ -156,6 +156,7 @@ void recursion();
 void AB_Game();
 void Initialize();
 void DealCards(Cards *card_1st, Cards *card_2nd, Cards *card_3rd);
+void CallLastOne();
 
 //int
 int GetLength(char []);
