@@ -3,22 +3,27 @@
 #include "stdafx.h"
 #include "headers.h"
 
-#define TIMES 100000
-
 int _tmain(int argc, _TCHAR* argv[])
 {
-	ControlDock();
-
-	/*
-	int times=0;
-	int i=0;
-	int sum1=0;
-	int sum2=0;
-	int trips=0;
-	int flush_straight=0;
-	
 	Initialize();
+	//ControlDock();
 	
+	int Available_List[54];
+	int times=1;
+	memset(Available_List,AVAILABLE,sizeof(Available_List));
+	
+	Cards card;
+	FILE *f;
+	f=fopen("result.txt","w");
+	for(times=1;times<=54;times++)
+	{		
+		card=CardGenerator(Available_List, JOKER);
+		//fprintf(f,"Card %2d: %-10s||%10s\n",times, card.suit_str, card.point_str);
+		fprintf(f,"Card %d: \t%s\t||\t%s\n",times, card.suit_str, card.point_str);
+	}
+	fclose(f);
+	
+	/*
 	Cards card_1st;
 	Cards card_2nd;
 	Cards card_3rd;
@@ -29,7 +34,6 @@ int _tmain(int argc, _TCHAR* argv[])
 	printf("card 3: %-8s%2s\n",card_3rd.suit_str,card_3rd.point_str);
 	printf("times:%d",times);
 	*/
-
 	
 /********************************************************************************************/
 /********************************************************************************************/

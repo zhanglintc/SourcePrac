@@ -1,9 +1,117 @@
 #include "stdafx.h"
 #include "headers.h"
 
+/*******************************************************
+Function:
+	Convert card's int to card's str.
+	If this card is a Joker, then set both its suit and point
+	string as Joker.
+Argument:Cards *
+Return	:None
+*******************************************************/
+void CardInt2StrConvertor(Cards *card)
+{
+	if		(card->suit_int==Spade)			strcpy(card->suit_str, "Spade");	//convert suit_int to suit_str
+	else if	(card->suit_int==Heart)			strcpy(card->suit_str, "Heart");
+	else if	(card->suit_int==Club)			strcpy(card->suit_str, "Club");
+	else if	(card->suit_int==Diamond)		strcpy(card->suit_str, "Diamond");
+	else if	(card->suit_int==Black_Joker)	strcpy(card->suit_str, "Blk Joker");
+	else if	(card->suit_int==Red_Joker)		strcpy(card->suit_str, "Red Joker");
 
-//#include "lexicon.dat"
+	if		(card->point_int==Ace)			strcpy(card->point_str, "A");		//convert point_int to point_str
+	else if	(card->point_int==Jack)			strcpy(card->point_str, "J");
+	else if	(card->point_int==Queen)		strcpy(card->point_str, "Q");
+	else if	(card->point_int==King)			strcpy(card->point_str, "K");
+	else if	(card->point_int==1)			strcpy(card->point_str, "1");
+	else if	(card->point_int==2)			strcpy(card->point_str, "2");
+	else if	(card->point_int==3)			strcpy(card->point_str, "3");
+	else if	(card->point_int==4)			strcpy(card->point_str, "4");
+	else if	(card->point_int==5)			strcpy(card->point_str, "5");
+	else if	(card->point_int==6)			strcpy(card->point_str, "6");
+	else if	(card->point_int==7)			strcpy(card->point_str, "7");
+	else if	(card->point_int==8)			strcpy(card->point_str, "8");
+	else if	(card->point_int==9)			strcpy(card->point_str, "9");
+	else if	(card->point_int==10)			strcpy(card->point_str, "10");
+	else if	(card->point_int==Black_Joker)	strcpy(card->point_str, "Blk Joker");
+	else if	(card->point_int==Red_Joker)	strcpy(card->point_str, "Red Joker");
+}
 
+
+/*******************************************************
+Function:
+	Generate one card, this card is available or not should
+	be controled by the function which has called CardGenerator(),
+	gives an Available_List to CardGenerator() to tell CardGenerator
+	which card can be used.
+	And the caller should tell CardGenerator should generate jokers or not.
+Argument:
+	int Available_List[]
+	bool with_joker
+Return:
+	Cards
+*******************************************************/
+Cards CardGenerator(int Available_List[54], bool with_joker)
+{
+	Cards card;													//new a card
+	
+	with_joker==true ? card.uni_num=randnum(1,54) : card.uni_num=randnum(1,52);
+	//if with_joker is true, 1 to 54
+	//if with_joker is false, 1 to 52
+	
+	while(Available_List[card.uni_num-1]!=AVAILABLE)				//if this card is not available, generate again
+	{
+		with_joker==true ? card.uni_num=randnum(1,54) : card.uni_num=randnum(1,52);
+		//if with_joker is true, 1 to 54
+		//if with_joker is false, 1 to 52
+	}
+	Available_List[card.uni_num-1]=NON_AVAILABLE;					//after one successful generation, set this card number unavailable
+	
+	if(with_joker)					//with_joker, 1 to 54
+	{
+		if(card.uni_num==53)		//Black_joker
+		{
+			card.suit_int=53;		//set both suit and point int as 53
+			card.point_int=53;
+		}
+		else if(card.uni_num==54)	//Red_Joker
+		{
+			card.suit_int=54;		//set both suit and point int as 54
+			card.point_int=54;
+		}
+		else						//the others except jokers(1 to 52)
+		{
+			card.suit_int=(card.uni_num-1)/13;					//set suit. 
+			
+																//0 for Spade
+																//1 for Heart
+																//2 for Club
+																//3 for Diamond
+			
+																//here the uni_number couldn't be over 52
+																//if the number over 52, such as 53, 53 - 1 = 52
+																//52 / 13 = 4, or even bigger, which means nothing
+			
+			card.point_int=card.uni_num%13;						//set point_int
+			if(card.point_int==0)card.point_int=13;				//there is no 0. for example, uni number 13 % 13 = 0, but its point_int should be 13
+		}
+	}
+	else							//not with_joker, 1 to 52
+	{
+		card.suit_int=(card.uni_num-1)/13;					//set suit. 0 for Spade, 1 for Heart, 2 for Club, 3 for Diamond
+		card.point_int=card.uni_num%13;						//set point_int
+		if(card.point_int==0)card.point_int=13;				//there is no 0. for example, uni number 13 % 13 = 0, but its point_int should be 13
+	}
+	
+	CardInt2StrConvertor(&card);							//set this card's string
+	
+	return card;											//return this new generated card
+}
+
+/*******************************************************
+Function	:Call LastOne() function
+Argument	:None
+Return		:None
+*******************************************************/
 void CallLastOne()
 {
 	char para_1st[COMMAND_STR_LEN];
@@ -46,6 +154,14 @@ void CallLastOne()
 	}
 }
 
+
+/*******************************************************
+Function	:is trips judgement
+Argument	:None
+Return:
+	ture: 	is trips
+	false:	is not trips
+*******************************************************/
 bool isTrips(Cards *card_1st, Cards *card_2nd, Cards *card_3rd)
 {
 	bool is_trips=false;
@@ -63,6 +179,39 @@ bool isTrips(Cards *card_1st, Cards *card_2nd, Cards *card_3rd)
 	return is_trips;
 }
 
+
+/*******************************************************
+Function	:is StraightFlush judgement
+Argument	:None
+Return:
+	ture: 	is StraightFlush
+	false:	is not StraightFlush
+*******************************************************/
+bool isStraightFlush(Cards *card_1st, Cards *card_2nd, Cards *card_3rd)
+{
+	bool is_StraightFlush=false;
+	
+	if(isFlush(card_1st, card_2nd, card_3rd)==true && isStraight(card_1st, card_2nd, card_3rd)==true)
+	//             isFlush                        and                        isStraight
+	{
+		is_StraightFlush=true;
+	}
+	else
+	{
+		is_StraightFlush=false;
+	}
+	
+	return is_StraightFlush;
+}
+
+
+/*******************************************************
+Function	:is flush judgement
+Argument	:None
+Return:
+	ture: 	is flush
+	false:	is not flush
+*******************************************************/
 bool isFlush(Cards *card_1st, Cards *card_2nd, Cards *card_3rd)
 {
 	bool is_flush=false;
@@ -80,6 +229,14 @@ bool isFlush(Cards *card_1st, Cards *card_2nd, Cards *card_3rd)
 	return is_flush;
 }
 
+
+/*******************************************************
+Function	:is straight judgement
+Argument	:None
+Return:
+	ture: 	is straight
+	false:	is not straight
+*******************************************************/
 bool isStraight(Cards *card_1st, Cards *card_2nd, Cards *card_3rd)
 {
 	bool is_straight=false;
@@ -112,6 +269,14 @@ bool isStraight(Cards *card_1st, Cards *card_2nd, Cards *card_3rd)
 	return is_straight;
 }
 
+
+/*******************************************************
+Function	:is pairs judgement
+Argument	:None
+Return:
+	ture: 	is pairs
+	false:	is not pairs
+*******************************************************/
 bool isPairs(Cards *card_1st, Cards *card_2nd, Cards *card_3rd)
 {
 	bool is_pairs=false;
@@ -133,84 +298,32 @@ bool isPairs(Cards *card_1st, Cards *card_2nd, Cards *card_3rd)
 	return is_pairs;
 }
 
-void DealCards(Cards *card_1st, Cards *card_2nd, Cards *card_3rd)						//Deal 3 card
+/*******************************************************
+Function	:Deal three cards(nothing special, just three cards)
+Argument	:None
+Return		:None
+*******************************************************/
+void DealThreeCards(Cards *card_1st, Cards *card_2nd, Cards *card_3rd)						//Deal 3 card
 {
-	bool isDone=false;
+	int Available_List[54];
+	memset(Available_List,AVAILABLE,sizeof(Available_List));
 	
-	while(isDone==false)//while NG
-	{
-		card_1st->suit_int=randnum(1,4);												//deal the 1st card
-		if		(card_1st->suit_int==Spade)		strcpy(card_1st->suit_str, "Spade");	//convert int to str
-		else if	(card_1st->suit_int==Heart)		strcpy(card_1st->suit_str, "Heart");
-		else if	(card_1st->suit_int==Club)		strcpy(card_1st->suit_str, "Club");
-		else if	(card_1st->suit_int==Diamond)	strcpy(card_1st->suit_str, "Diamond");
-		card_1st->point_int=randnum(1,13);
-		if		(card_1st->point_int==Ace)		strcpy(card_1st->point_str, "A");
-		else if	(card_1st->point_int==Jack)		strcpy(card_1st->point_str, "J");
-		else if	(card_1st->point_int==Queen)	strcpy(card_1st->point_str, "Q");
-		else if	(card_1st->point_int==King)		strcpy(card_1st->point_str, "K");
-		else if	(card_1st->point_int==1)		strcpy(card_1st->point_str, "1");
-		else if	(card_1st->point_int==2)		strcpy(card_1st->point_str, "2");
-		else if	(card_1st->point_int==3)		strcpy(card_1st->point_str, "3");
-		else if	(card_1st->point_int==4)		strcpy(card_1st->point_str, "4");
-		else if	(card_1st->point_int==5)		strcpy(card_1st->point_str, "5");
-		else if	(card_1st->point_int==6)		strcpy(card_1st->point_str, "6");
-		else if	(card_1st->point_int==7)		strcpy(card_1st->point_str, "7");
-		else if	(card_1st->point_int==8)		strcpy(card_1st->point_str, "8");
-		else if	(card_1st->point_int==9)		strcpy(card_1st->point_str, "9");
-		else if	(card_1st->point_int==10)		strcpy(card_1st->point_str, "10");
-		
-		card_2nd->suit_int=randnum(1,4);												//deal the 2nd card
-		if		(card_2nd->suit_int==Spade)		strcpy(card_2nd->suit_str, "Spade");	//convert int to str
-		else if	(card_2nd->suit_int==Heart)		strcpy(card_2nd->suit_str, "Heart");
-		else if	(card_2nd->suit_int==Club)		strcpy(card_2nd->suit_str, "Club");
-		else if	(card_2nd->suit_int==Diamond)	strcpy(card_2nd->suit_str, "Diamond");
-		card_2nd->point_int=randnum(1,13);
-		if		(card_2nd->point_int==Ace)		strcpy(card_2nd->point_str, "A");
-		else if	(card_2nd->point_int==Jack)		strcpy(card_2nd->point_str, "J");
-		else if	(card_2nd->point_int==Queen)	strcpy(card_2nd->point_str, "Q");
-		else if	(card_2nd->point_int==King)		strcpy(card_2nd->point_str, "K");
-		else if	(card_2nd->point_int==1)		strcpy(card_2nd->point_str, "1");
-		else if	(card_2nd->point_int==2)		strcpy(card_2nd->point_str, "2");
-		else if	(card_2nd->point_int==3)		strcpy(card_2nd->point_str, "3");
-		else if	(card_2nd->point_int==4)		strcpy(card_2nd->point_str, "4");
-		else if	(card_2nd->point_int==5)		strcpy(card_2nd->point_str, "5");
-		else if	(card_2nd->point_int==6)		strcpy(card_2nd->point_str, "6");
-		else if	(card_2nd->point_int==7)		strcpy(card_2nd->point_str, "7");
-		else if	(card_2nd->point_int==8)		strcpy(card_2nd->point_str, "8");
-		else if	(card_2nd->point_int==9)		strcpy(card_2nd->point_str, "9");
-		else if	(card_2nd->point_int==10)		strcpy(card_2nd->point_str, "10");
-		
-		card_3rd->suit_int=randnum(1,4);												//deal the 3rd card
-		if		(card_3rd->suit_int==Spade)		strcpy(card_3rd->suit_str, "Spade");	//convert int to str
-		else if	(card_3rd->suit_int==Heart)		strcpy(card_3rd->suit_str, "Heart");
-		else if	(card_3rd->suit_int==Club)		strcpy(card_3rd->suit_str, "Club");
-		else if	(card_3rd->suit_int==Diamond)	strcpy(card_3rd->suit_str, "Diamond");
-		card_3rd->point_int=randnum(1,13);
-		if		(card_3rd->point_int==Ace)		strcpy(card_3rd->point_str, "A");
-		else if	(card_3rd->point_int==Jack)		strcpy(card_3rd->point_str, "J");
-		else if	(card_3rd->point_int==Queen)	strcpy(card_3rd->point_str, "Q");
-		else if	(card_3rd->point_int==King)		strcpy(card_3rd->point_str, "K");
-		else if	(card_3rd->point_int==1)		strcpy(card_3rd->point_str, "1");
-		else if	(card_3rd->point_int==2)		strcpy(card_3rd->point_str, "2");
-		else if	(card_3rd->point_int==3)		strcpy(card_3rd->point_str, "3");
-		else if	(card_3rd->point_int==4)		strcpy(card_3rd->point_str, "4");
-		else if	(card_3rd->point_int==5)		strcpy(card_3rd->point_str, "5");
-		else if	(card_3rd->point_int==6)		strcpy(card_3rd->point_str, "6");
-		else if	(card_3rd->point_int==7)		strcpy(card_3rd->point_str, "7");
-		else if	(card_3rd->point_int==8)		strcpy(card_3rd->point_str, "8");
-		else if	(card_3rd->point_int==9)		strcpy(card_3rd->point_str, "9");
-		else if	(card_3rd->point_int==10)		strcpy(card_3rd->point_str, "10");
-		
-		
-		//check there is same card or not
-		if		(card_1st->suit_int==card_2nd->suit_int && card_1st->point_int==card_2nd->point_int)isDone=false;	//1st same as 2nd, NG
-		else if	(card_1st->suit_int==card_3rd->suit_int && card_1st->point_int==card_3rd->point_int)isDone=false;	//1st same as 3rd, NG
-		else if	(card_2nd->suit_int==card_3rd->suit_int && card_2nd->point_int==card_3rd->point_int)isDone=false;	//2nd same as 3rd, NG
-		else 	isDone=true;																				//individual, OK
-	}
+	*card_1st=CardGenerator(Available_List,NOJOKER);
+	*card_2nd=CardGenerator(Available_List,NOJOKER);
+	*card_3rd=CardGenerator(Available_List,NOJOKER);
 }
 
+
+/*******************************************************
+Function:
+	Generate some types of card combination in ThreeCardBrag
+	game depends on input parameter "type".
+Argument:
+	Cards *, Cards *, Cards *, char type
+	(type for Trips, Flush, Straight, etc)
+Return:
+	times to generate this type
+*******************************************************/
 int ThreeCardBrag(Cards *card_1st, Cards *card_2nd, Cards *card_3rd, char type)
 {
 	int i=0;			//for loop
@@ -221,7 +334,7 @@ int ThreeCardBrag(Cards *card_1st, Cards *card_2nd, Cards *card_3rd, char type)
 	{
 		while(isDone==false)
 		{
-			DealCards(card_1st, card_2nd, card_3rd);
+			DealThreeCards(card_1st, card_2nd, card_3rd);
 			isDone=isTrips(card_1st, card_2nd, card_3rd);
 			times++;
 		}
@@ -231,9 +344,8 @@ int ThreeCardBrag(Cards *card_1st, Cards *card_2nd, Cards *card_3rd, char type)
 	{
 		while(isDone==false)
 		{
-			DealCards(card_1st, card_2nd, card_3rd);
-			if(isFlush(card_1st, card_2nd, card_3rd)==true && isStraight(card_1st, card_2nd, card_3rd)==true)
-			//isFlush and isStraight
+			DealThreeCards(card_1st, card_2nd, card_3rd);
+			if(isStraightFlush(card_1st, card_2nd, card_3rd)==true)
 			{
 				isDone=true;
 			}
@@ -249,7 +361,7 @@ int ThreeCardBrag(Cards *card_1st, Cards *card_2nd, Cards *card_3rd, char type)
 	{
 		while(isDone==false)
 		{
-			DealCards(card_1st, card_2nd, card_3rd);
+			DealThreeCards(card_1st, card_2nd, card_3rd);
 			isDone=isFlush(card_1st, card_2nd, card_3rd);
 			times++;
 		}
@@ -259,7 +371,7 @@ int ThreeCardBrag(Cards *card_1st, Cards *card_2nd, Cards *card_3rd, char type)
 	{
 		while(isDone==false)
 		{
-			DealCards(card_1st, card_2nd, card_3rd);
+			DealThreeCards(card_1st, card_2nd, card_3rd);
 			isDone=isStraight(card_1st, card_2nd, card_3rd);
 			times++;
 		}
@@ -269,7 +381,7 @@ int ThreeCardBrag(Cards *card_1st, Cards *card_2nd, Cards *card_3rd, char type)
 	{
 		while(isDone==false)
 		{
-			DealCards(card_1st, card_2nd, card_3rd);
+			DealThreeCards(card_1st, card_2nd, card_3rd);
 			isDone=isPairs(card_1st, card_2nd, card_3rd);
 			times++;
 		}
@@ -307,7 +419,7 @@ void AB_Game()
 	int R1,R2,R3,R4;					//Rand  1,2,3,4
 	int G1,G2,G3,G4;					//Guess 1,2,3,4
 
-	R1=R2=R3=R4=randnum(0,9);			//generate numbers 
+	R1=R2=R3=R4=randnum(0,9);			//generate numbers
 
 	while(R2==R1)						//to make sure there is no repetition -S
 	{

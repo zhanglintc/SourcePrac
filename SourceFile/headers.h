@@ -16,13 +16,17 @@
 #define NO_RESTRICT_LENGTH		0
 #define NO_RESTRICT_KEYWORD		0
 #define ERROR_MARK				-1
+#define NON_AVAILABLE			1
+#define AVAILABLE				0
+#define JOKER					true
+#define NOJOKER					false
 
 //defines for ThreeCardBrag -S
-#define Spade					1
-#define Heart					2
-#define Club					3
-#define Diamond					4
-#define Black_joker				53
+#define Spade					0
+#define Heart					1
+#define Club					2
+#define Diamond					3
+#define Black_Joker				53
 #define Red_Joker				54
 
 #define Ace						1
@@ -53,6 +57,14 @@
 //-------------------------------------------------------------------------------------
 typedef struct
 {
+	int  uni_num;				// 1-54 for All
+								// 1-13 for Spade
+								//14-26 for Heart
+								//27-39 for Club
+								//40-52 for Diamond
+								//53 	for Black_joker
+								//54 	for Red_Joker
+	
 	int  suit_int;				//int for Spade, Heart, Club, Diamond, Black_joker, Red_Joker
 	char suit_str[10];			//string for Spade, Heart, Club, Diamond, Black_joker, Red_Joker
 	int  point_int;				//int for Ace,2,3,4,5,6,7,8,9,10,Jack,Queen,King
@@ -77,8 +89,6 @@ typedef struct
 /*******************************************************************************/
 //externs
 /*******************************************************************************/
-extern char *lexicon8k[];					//declared in lexicon.dat, included in functions.cpp
-extern char *lexicon36k[];					//declared in lexicon.dat, included in functions.cpp
 extern char *lexicon90k_1[];				//declared in lex_1.cpp
 extern char *lexicon90k_2[];				//declared in lex_2.cpp
 extern char *lexicon90k_3[];				//declared in lex_3.cpp
@@ -155,8 +165,9 @@ void Big_Little_Endian_Judge();
 void recursion();
 void AB_Game();
 void Initialize();
-void DealCards(Cards *card_1st, Cards *card_2nd, Cards *card_3rd);
+void DealThreeCards(Cards *card_1st, Cards *card_2nd, Cards *card_3rd);
 void CallLastOne();
+void CardInt2StrConvertor(Cards *card);
 
 //int
 int GetLength(char []);
@@ -174,10 +185,13 @@ bool CheckData(char [],char [],int ,int ,int);
 bool AB_GameInputCheck(char data[]);
 bool Equal(char command_in[], char command_require[]);
 bool isTrips(Cards *card_1st, Cards *card_2nd, Cards *card_3rd);
+bool isStraightFlush(Cards *card_1st, Cards *card_2nd, Cards *card_3rd);
 bool isFlush(Cards *card_1st, Cards *card_2nd, Cards *card_3rd);
 bool isStraight(Cards *card_1st, Cards *card_2nd, Cards *card_3rd);
 bool isPairs(Cards *card_1st, Cards *card_2nd, Cards *card_3rd);
-/*bool isStraightFlush(Cards *card_1st, Cards *card_2nd, Cards *card_3rd);*/
+
+//others
+Cards CardGenerator(int Available_List[54], bool with_joker);
 
 /*******************************************************************************/
 /*******************************************************************************/
