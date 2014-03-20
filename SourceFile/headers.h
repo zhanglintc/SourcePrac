@@ -180,7 +180,7 @@ int Str2Int(char *,int );
 int Str2Int(char *,int );
 int Factorial(int data);
 int randnum(int min,int max);
-int roll(char *para);
+int roll(char *, char *);
 int CountArrayLength(int arr[]);
 int ThreeCardBrag(Cards *card_1st, Cards *card_2nd, Cards *card_3rd, char type);
 

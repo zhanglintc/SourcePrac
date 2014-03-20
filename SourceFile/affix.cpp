@@ -220,7 +220,9 @@ Function	:String to Int(without length)
 Arguement	:char []
 Return		:int
 *******************************************************/
-//return value of string,-1 when not valid
+//return value of string
+//return -1 when not valid
+//return  0 when char[] is empty
 int Str2Int(char data[100])
 {
 	int ret=0;

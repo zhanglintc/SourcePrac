@@ -3,10 +3,17 @@
 #include "stdafx.h"
 #include "headers.h"
 
+//2014.03.20 ZhangLin -S
+//ADVANCED LEARNER'S English-Chinese Dictionary
+//roll 2056 resulted 1830
+//roll   16 resulted 5
+//-----theodolite-----
+//2014.03.20 ZhangLin -E
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 	Initialize();
-	//ControlDock();
+	ControlDock();
 	Cards card;
 	int times=0;
 	int Available_List[54]; 

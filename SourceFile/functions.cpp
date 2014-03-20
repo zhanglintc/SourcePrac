@@ -809,9 +809,9 @@ void ControlDock(void)
 		}
 		
 		//Call DotA's roll function
-		else if( Equal(command,"-roll") )
+		else if( Equal(command,"-roll") || Equal(command,"roll") )
 		{
-			roll(para_1st);
+			roll(para_1st, para_2nd);
 		}
 		
 		//Call iOS game woords' assistant function
@@ -1108,14 +1108,29 @@ Function:DotA like, Roll game
 Argument:None
 Return:None
 *******************************************************/
-int roll(char *para)
+int roll(char *para_1, char *para_2)
 {
+	int ret=0;
+	int para1=0;
+	int para2=0;
+	
+	para1=Str2Int(para_1);
+	para2=Str2Int(para_2);
+	
+	ret=randnum(para1,para2);
+	
+	printf("Your rolled num: %d\n\n",ret);
+	
+	return ret;
+	
+	/*
 	int ret=0;
 	int range=Str2Int(para);
 	if(range==0)range=100;
 	ret=randnum(0,range);
 	printf("Your rolled num: %d\n\n",ret);
 	return ret;
+	*/
 }
 
 /*******************************************************
