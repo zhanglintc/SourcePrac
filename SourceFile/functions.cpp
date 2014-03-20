@@ -97,42 +97,35 @@ void minprintf(char *fmt, ...)
 /*******************************************************
 Function:
 	Convert and card's Uni_Num to card's Int and set Int to card
-Argument:Cards *, bool
+Argument:Cards *
 Return	:None
 *******************************************************/
-void CardUni2Int(Cards *card, bool with_joker)
+void CardUni2Int(Cards *card)
 {
-	if(with_joker)					//with_joker, 0 to 53
+	if(card->uni_num==52)		//Black_joker
 	{
-		if(card->uni_num==52)		//Black_joker
-		{
-			card->suit_int=52;		//set both suit and point int as 52
-			card->point_int=52;
-		}
-		else if(card->uni_num==53)	//Red_Joker
-		{
-			card->suit_int=53;		//set both suit and point int as 53
-			card->point_int=53;
-		}
-		else						//the others except jokers(0 to 51)
-		{
-			card->suit_int=(card->uni_num)/13;					//set suit. 
-			
+		card->suit_int=52;		//set both suit and point int as 52
+		card->point_int=52;
+	}
+	else if(card->uni_num==53)	//Red_Joker
+	{
+		card->suit_int=53;		//set both suit and point int as 53
+		card->point_int=53;
+	}
+	else						//0 to 51
+	{
+		card->suit_int=(card->uni_num)/13;						//set suit.
+		
+																//suit:
 																//0 for Spade
 																//1 for Heart
 																//2 for Club
 																//3 for Diamond
-			
+		
 																//here the uni_number couldn't be over 51
 																//if the number over 51, such as 52
 																//52 / 13 = 4, or even bigger, which means nothing
-			
-			card->point_int=card->uni_num%13+1;					//set point_int, eg: 0%13=0, 0+1=1 means Ace, thus here should be added 1
-		}
-	}
-	else							//not with_joker, 1 to 52
-	{
-		card->suit_int=(card->uni_num)/13;						//set suit. 0 for Spade, 1 for Heart, 2 for Club, 3 for Diamond
+
 		card->point_int=card->uni_num%13+1;						//set point_int, eg: 0%13=0, 0+1=1 means Ace, thus here should be added 1
 	}
 }
@@ -204,7 +197,7 @@ Cards CardGenerator(int Available_List[54], bool with_joker)
 	Available_List[card.uni_num]=NON_AVAILABLE;					//after one successful generation, set this card number unavailable
 	
 	
-	CardUni2Int(&card, with_joker);								//Convert Uni_Num to Int, and set it to card
+	CardUni2Int(&card);											//Convert Uni_Num to Int, and set it to card
 	CardInt2StrConvertor(&card);								//set this card's string
 	
 	return card;												//return this new generated card

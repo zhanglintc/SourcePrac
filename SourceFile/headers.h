@@ -168,7 +168,7 @@ void AB_Game();
 void Initialize();
 void DealThreeCards(Cards *card_1st, Cards *card_2nd, Cards *card_3rd);
 void CallLastOne();
-void CardUni2Int(Cards *card, bool with_joker);
+void CardUni2Int(Cards *card);
 void CardInt2StrConvertor(Cards *card);
 void UncertainParaTestFun(int a, ...);
 void minprintf(char *fmt, ...);
