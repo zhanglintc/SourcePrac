@@ -7,12 +7,11 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	Initialize();
 	//ControlDock();
-	
-	int Available_List[54];
-	int times=1;
-	memset(Available_List,AVAILABLE,sizeof(Available_List));
-	
 	Cards card;
+	int times=0;
+	int Available_List[54]; 
+	memset(Available_List,AVAILABLE,sizeof(Available_List));
+
 	FILE *f;
 	f=fopen("result.txt","w");
 	for(times=1;times<=54;times++)

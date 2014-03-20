@@ -1,6 +1,143 @@
 #include "stdafx.h"
 #include "headers.h"
 
+
+/*******************************************************
+Function:
+	for the uncertain parameters functions study.
+Argument:... *
+Return	:None
+*******************************************************/
+void UncertainParaTestFun(int Para, ...)
+{
+/*
+typedef char *  va_list;
+
+#define _INTSIZEOF(n)   ( (sizeof(n) + sizeof(int) - 1) & ~(sizeof(int) - 1) )
+
+#define va_start(ap,v)  ( ap = (va_list)&v + _INTSIZEOF(v) )
+#define va_arg(ap,t)    ( *(t *)((ap += _INTSIZEOF(t)) - _INTSIZEOF(t)) )
+#define va_end(ap)      ( ap = (va_list)0 )
+*/
+	va_list Valist_P;
+	va_start(Valist_P,Para);			//va_start(), make Valist_P point to the Para
+	while(Para!=0)
+	{
+		printf("%d\n",Para);
+		Para=va_arg(Valist_P,int);		//va_arg(), make Valist_P point to the one after Para, and then return the value to Para
+	}
+	va_end(Valist_P); /* clean up when done */
+}
+
+
+/*******************************************************
+Function:
+	Another function for the uncertain parameters functions study.
+Argument:... *
+Return	:None
+*******************************************************/
+void minprintf(char *fmt, ...)
+
+{
+/*//below is the test code
+	int i = 1234;
+	int j = 5678;
+	char *s="nihao";
+	double f=0.11f;
+	fum(1,2,3,4,5,6,7);
+	minprintf("the first test:i=%d\n",i,j);
+
+	minprintf("the secend test:i=%d; %x;j=%d;\n",i,0xabcd,j);
+	minprintf("the 3rd test:s=%s\n",s);
+	minprintf("the 4th test:f=%f\n",f);
+	minprintf("the 5th test:s=%s,f=%f\n",s,f);
+//above is the test code*/
+
+	va_list ap; /* points to each unnamed arg in turn */
+	char *p, *sval;
+	int ival;
+	double dval;
+	va_start(ap, fmt); /* make ap point to 1st unnamed arg */
+	for (p = fmt; *p; p++)
+	{
+		if (*p != '%') 
+		{
+			putchar(*p);
+			continue;
+		}
+		switch (*++p)
+		{
+			 case 'd':
+					ival = va_arg(ap, int);
+					printf("%d", ival);
+					break;
+			 case 'x':
+					ival=va_arg(ap,int);
+					printf("%#x",ival);
+					break;
+			 case 'f':
+					dval = va_arg(ap, double);
+					printf("%f", dval);
+					break;
+			 case 's':
+					for (sval = va_arg(ap, char *); *sval; sval++)
+					{
+						putchar(*sval);
+					}
+					break;
+			 default:
+					putchar(*p);
+					break;
+		  }
+   }
+   va_end(ap); /* clean up when done */
+}
+
+
+/*******************************************************
+Function:
+	Convert and card's Uni_Num to card's Int and set Int to card
+Argument:Cards *, bool
+Return	:None
+*******************************************************/
+void CardUni2Int(Cards *card, bool with_joker)
+{
+	if(with_joker)					//with_joker, 0 to 53
+	{
+		if(card->uni_num==52)		//Black_joker
+		{
+			card->suit_int=52;		//set both suit and point int as 52
+			card->point_int=52;
+		}
+		else if(card->uni_num==53)	//Red_Joker
+		{
+			card->suit_int=53;		//set both suit and point int as 53
+			card->point_int=53;
+		}
+		else						//the others except jokers(0 to 51)
+		{
+			card->suit_int=(card->uni_num)/13;					//set suit. 
+			
+																//0 for Spade
+																//1 for Heart
+																//2 for Club
+																//3 for Diamond
+			
+																//here the uni_number couldn't be over 51
+																//if the number over 51, such as 52
+																//52 / 13 = 4, or even bigger, which means nothing
+			
+			card->point_int=card->uni_num%13+1;					//set point_int, eg: 0%13=0, 0+1=1 means Ace, thus here should be added 1
+		}
+	}
+	else							//not with_joker, 1 to 52
+	{
+		card->suit_int=(card->uni_num)/13;						//set suit. 0 for Spade, 1 for Heart, 2 for Club, 3 for Diamond
+		card->point_int=card->uni_num%13+1;						//set point_int, eg: 0%13=0, 0+1=1 means Ace, thus here should be added 1
+	}
+}
+
+
 /*******************************************************
 Function:
 	Convert card's int to card's str.
@@ -15,8 +152,8 @@ void CardInt2StrConvertor(Cards *card)
 	else if	(card->suit_int==Heart)			strcpy(card->suit_str, "Heart");
 	else if	(card->suit_int==Club)			strcpy(card->suit_str, "Club");
 	else if	(card->suit_int==Diamond)		strcpy(card->suit_str, "Diamond");
-	else if	(card->suit_int==Black_Joker)	strcpy(card->suit_str, "Blk Joker");
-	else if	(card->suit_int==Red_Joker)		strcpy(card->suit_str, "Red Joker");
+	else if	(card->suit_int==Black_Joker)	strcpy(card->suit_str, "Blk");
+	else if	(card->suit_int==Red_Joker)		strcpy(card->suit_str, "Red");
 
 	if		(card->point_int==Ace)			strcpy(card->point_str, "A");		//convert point_int to point_str
 	else if	(card->point_int==Jack)			strcpy(card->point_str, "J");
@@ -32,8 +169,8 @@ void CardInt2StrConvertor(Cards *card)
 	else if	(card->point_int==8)			strcpy(card->point_str, "8");
 	else if	(card->point_int==9)			strcpy(card->point_str, "9");
 	else if	(card->point_int==10)			strcpy(card->point_str, "10");
-	else if	(card->point_int==Black_Joker)	strcpy(card->point_str, "Blk Joker");
-	else if	(card->point_int==Red_Joker)	strcpy(card->point_str, "Red Joker");
+	else if	(card->point_int==Black_Joker)	strcpy(card->point_str, "Blk");
+	else if	(card->point_int==Red_Joker)	strcpy(card->point_str, "Red");
 }
 
 
@@ -54,57 +191,23 @@ Cards CardGenerator(int Available_List[54], bool with_joker)
 {
 	Cards card;													//new a card
 	
-	with_joker==true ? card.uni_num=randnum(1,54) : card.uni_num=randnum(1,52);
+	with_joker==true ? card.uni_num=randnum(0,53) : card.uni_num=randnum(0,51);
 	//if with_joker is true, 1 to 54
 	//if with_joker is false, 1 to 52
 	
-	while(Available_List[card.uni_num-1]!=AVAILABLE)				//if this card is not available, generate again
+	while(Available_List[card.uni_num]!=AVAILABLE)				//if this card is not available, generate again
 	{
-		with_joker==true ? card.uni_num=randnum(1,54) : card.uni_num=randnum(1,52);
+		with_joker==true ? card.uni_num=randnum(0,53) : card.uni_num=randnum(0,51);
 		//if with_joker is true, 1 to 54
 		//if with_joker is false, 1 to 52
 	}
-	Available_List[card.uni_num-1]=NON_AVAILABLE;					//after one successful generation, set this card number unavailable
+	Available_List[card.uni_num]=NON_AVAILABLE;					//after one successful generation, set this card number unavailable
 	
-	if(with_joker)					//with_joker, 1 to 54
-	{
-		if(card.uni_num==53)		//Black_joker
-		{
-			card.suit_int=53;		//set both suit and point int as 53
-			card.point_int=53;
-		}
-		else if(card.uni_num==54)	//Red_Joker
-		{
-			card.suit_int=54;		//set both suit and point int as 54
-			card.point_int=54;
-		}
-		else						//the others except jokers(1 to 52)
-		{
-			card.suit_int=(card.uni_num-1)/13;					//set suit. 
-			
-																//0 for Spade
-																//1 for Heart
-																//2 for Club
-																//3 for Diamond
-			
-																//here the uni_number couldn't be over 52
-																//if the number over 52, such as 53, 53 - 1 = 52
-																//52 / 13 = 4, or even bigger, which means nothing
-			
-			card.point_int=card.uni_num%13;						//set point_int
-			if(card.point_int==0)card.point_int=13;				//there is no 0. for example, uni number 13 % 13 = 0, but its point_int should be 13
-		}
-	}
-	else							//not with_joker, 1 to 52
-	{
-		card.suit_int=(card.uni_num-1)/13;					//set suit. 0 for Spade, 1 for Heart, 2 for Club, 3 for Diamond
-		card.point_int=card.uni_num%13;						//set point_int
-		if(card.point_int==0)card.point_int=13;				//there is no 0. for example, uni number 13 % 13 = 0, but its point_int should be 13
-	}
 	
-	CardInt2StrConvertor(&card);							//set this card's string
+	CardUni2Int(&card, with_joker);								//Convert Uni_Num to Int, and set it to card
+	CardInt2StrConvertor(&card);								//set this card's string
 	
-	return card;											//return this new generated card
+	return card;												//return this new generated card
 }
 
 /*******************************************************

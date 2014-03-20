@@ -6,6 +6,7 @@
 #include "math.h"
 #include "time.h"
 #include "limits.h"
+#include "stdarg.h"
 
 /*******************************************************************************/
 //defines
@@ -26,8 +27,8 @@
 #define Heart					1
 #define Club					2
 #define Diamond					3
-#define Black_Joker				53
-#define Red_Joker				54
+#define Black_Joker				52//card uni_number from 0 to 53, thus Black_Joker is 52
+#define Red_Joker				53//card uni_number from 0 to 53, thus Black_Joker is 53
 
 #define Ace						1
 #define Jack					11
@@ -57,11 +58,11 @@
 //-------------------------------------------------------------------------------------
 typedef struct
 {
-	int  uni_num;				// 1-54 for All
-								// 1-13 for Spade
-								//14-26 for Heart
-								//27-39 for Club
-								//40-52 for Diamond
+	int  uni_num;				// 0-53 for All
+								// 0-12 for Spade
+								//13-25 for Heart
+								//26-38 for Club
+								//39-51 for Diamond
 								//53 	for Black_joker
 								//54 	for Red_Joker
 	
@@ -167,7 +168,10 @@ void AB_Game();
 void Initialize();
 void DealThreeCards(Cards *card_1st, Cards *card_2nd, Cards *card_3rd);
 void CallLastOne();
+void CardUni2Int(Cards *card, bool with_joker);
 void CardInt2StrConvertor(Cards *card);
+void UncertainParaTestFun(int a, ...);
+void minprintf(char *fmt, ...);
 
 //int
 int GetLength(char []);
