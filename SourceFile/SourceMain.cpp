@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "headers.h"
 
+#define _INTSIZEOF(n)   ( (sizeof(n) + sizeof(int) - 1) & ~(sizeof(int) - 1) )
 //2014.03.20 ZhangLin -S
 //ADVANCED LEARNER'S English-Chinese Dictionary
 //roll 2056 resulted 1830
@@ -13,6 +14,8 @@
 int _tmain(int argc, _TCHAR* argv[])
 {
 	Initialize();
+	short  x;
+	printf("%d\n",_INTSIZEOF(x));
 	ControlDock();
 	Cards card;
 	int times=0;

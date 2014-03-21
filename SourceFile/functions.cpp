@@ -811,7 +811,11 @@ void ControlDock(void)
 		//Call DotA's roll function
 		else if( Equal(command,"-roll") || Equal(command,"roll") )
 		{
-			roll(para_1st, para_2nd);
+			if(roll(para_1st, para_2nd)==ERROR_MARK)
+			{
+				printf("Sorry, unknown command,\n");
+				printf("please check your input and try again.\n\n");
+			}
 		}
 		
 		//Call iOS game woords' assistant function
@@ -1119,7 +1123,7 @@ int roll(char *para_1, char *para_2)
 	
 	ret=randnum(para1,para2);
 	
-	printf("Your rolled num: %d\n\n",ret);
+	if(ret!=ERROR_MARK)printf("Your rolled num: %d\n\n",ret);
 	
 	return ret;
 	
