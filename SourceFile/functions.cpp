@@ -24,7 +24,7 @@ typedef char *  va_list;
 	while(Para!=0)
 	{
 		printf("%d\n",Para);
-		Para=va_arg(Valist_P,int);		//va_arg(), make Valist_P point to the one after Para, and then return the value to Para
+		Para=va_arg(Valist_P,int);		//va_arg(), make Valist_P point to the one after Para, and then return the value of Para
 	}
 	va_end(Valist_P); /* clean up when done */
 }
