@@ -14,9 +14,8 @@
 int _tmain(int argc, _TCHAR* argv[])
 {
 	Initialize();
-	short  x;
-	printf("%d\n",_INTSIZEOF(x));
 	ControlDock();
+
 	Cards card;
 	int times=0;
 	int Available_List[54]; 

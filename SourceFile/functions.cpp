@@ -778,6 +778,10 @@ void ControlDock(void)
 	char command[COMMAND_STR_LEN];
 	char para_1st[COMMAND_STR_LEN];
 	char para_2nd[COMMAND_STR_LEN];
+
+	memset(command,'\0',COMMAND_STR_LEN);					//initialize command
+	memset(para_1st,'\0',COMMAND_STR_LEN);					//initialize parameter 1st
+	memset(para_2nd,'\0',COMMAND_STR_LEN);					//initialize parameter 2nd
 	
 	while(true)																	//Loops, waiting for the command
 	{
@@ -811,11 +815,7 @@ void ControlDock(void)
 		//Call DotA's roll function
 		else if( Equal(command,"-roll") || Equal(command,"roll") )
 		{
-			if(roll(para_1st, para_2nd)==ERROR_MARK)
-			{
-				printf("Sorry, unknown command,\n");
-				printf("please check your input and try again.\n\n");
-			}
+			roll(para_1st, para_2nd);
 		}
 		
 		//Call iOS game woords' assistant function
@@ -1108,33 +1108,45 @@ void CheckLexicon(char *data,int st,int end)
 */
 
 /*******************************************************
-Function:DotA like, Roll game
-Argument:None
-Return:None
+Function:A roll game which is similar to then one in DotA
+Argument:char *, char *
+Return	:None
 *******************************************************/
-int roll(char *para_1, char *para_2)
+int roll(char *paraStr_1, char *paraStr_2)
 {
 	int ret=0;
-	int para1=0;
-	int para2=0;
+	int paraInt_1=0;
+	int paraInt_2=0;
 	
-	para1=Str2Int(para_1);
-	para2=Str2Int(para_2);
+	paraInt_1=Str2Int(paraStr_1);									//convert Str to Int, -1 when paraStr is in valid
+	paraInt_2=Str2Int(paraStr_2);									//convert Str to Int, -1 when paraStr is in valid
 	
-	ret=randnum(para1,para2);
+	if( paraInt_1==ERROR_MARK || paraInt_2==ERROR_MARK )			//if para1 or prar2 is invalid, print invalid
+	{
+		printf("Sorry, unknown command,\n");
+		printf("please check your input and try again.\n\n");
+	}
+	else if( paraInt_1 > paraInt_2 && GetLength(paraStr_2)!=0 )		//para1 is bigger than para2 and para2 is not NULL
+	{
+		printf("Sorry, unknown command,\n");
+		printf("please check your input and try again.\n\n");
+	}
+	else if( GetLength(paraStr_1)==0 && GetLength(paraStr_2)==0 )	//if para1 and para2 is NULL, Rand default (0-100)
+	{
+		ret=randnum(0,100);
+		printf("You have rolled: %d -- (0 to 100)\n\n",ret);
+	}
+	else															//normal Rand
+	{
+		ret=randnum(paraInt_1,paraInt_2);
+		if(paraInt_1 > paraInt_2)									//adjust para1 and para2's place when para2 is NULL
+		{
+			swap(&paraInt_1,&paraInt_2);
+		}
+		printf("You have rolled: %d -- (%d to %d)\n\n",ret,paraInt_1,paraInt_2);
+	}	
 	
-	if(ret!=ERROR_MARK)printf("Your rolled num: %d\n\n",ret);
-	
-	return ret;
-	
-	/*
-	int ret=0;
-	int range=Str2Int(para);
-	if(range==0)range=100;
-	ret=randnum(0,range);
-	printf("Your rolled num: %d\n\n",ret);
-	return ret;
-	*/
+	return 0;
 }
 
 /*******************************************************

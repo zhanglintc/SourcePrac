@@ -200,6 +200,9 @@ Function	:String to Int(with the length you want to change)
 Arguement	:char *,int
 Return		:int
 *******************************************************/
+//return value of string
+//return -1 when not valid
+//return  0 when char[] is empty
 int Str2Int(char *data,int length)
 {
 	int ret=0;
