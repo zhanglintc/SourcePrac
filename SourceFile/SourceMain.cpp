@@ -11,8 +11,10 @@
 //-----theodolite-----
 //2014.03.20 ZhangLin -E
 
-//test comment by zhanglintc
-//test comment by zhanglintc 2014.03.23 01:09
+//some modification made by lane
+//some modification made by lane again
+//some modification made by lane again and again
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 	Initialize();
