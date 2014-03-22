@@ -12,6 +12,7 @@
 //2014.03.20 ZhangLin -E
 
 //test comment by zhanglintc
+//test comment by zhanglintc 2014.03.23 01:09
 int _tmain(int argc, _TCHAR* argv[])
 {
 	Initialize();
