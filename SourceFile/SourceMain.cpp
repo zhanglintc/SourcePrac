@@ -16,6 +16,7 @@
 //some modification made by lane again and again
 //some modification made by bernard 1st
 //org from bernard
+//org from lane
 
 int _tmain(int argc, _TCHAR* argv[])
 {
