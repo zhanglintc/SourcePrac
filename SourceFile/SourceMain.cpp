@@ -12,6 +12,7 @@
 //2014.03.20 ZhangLin -E
 
 //some modification made by lane
+//some modification made by lane again
 
 int _tmain(int argc, _TCHAR* argv[])
 {
