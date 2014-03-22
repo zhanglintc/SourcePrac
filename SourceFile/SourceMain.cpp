@@ -11,6 +11,7 @@
 //-----theodolite-----
 //2014.03.20 ZhangLin -E
 
+//test comment by zhanglintc
 int _tmain(int argc, _TCHAR* argv[])
 {
 	Initialize();
