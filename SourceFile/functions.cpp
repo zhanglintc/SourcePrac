@@ -220,7 +220,7 @@ void CallLastOne()
 	
 	while(true)
 	{
-		printf("\nControlDock\\LastOne>(people,keys)");							//welcome words
+		printf("\nControlDock\\LastOne>(peoples,number)");							//welcome words
 		GetCommand(para_1st,para_2nd,para_3rd);										//get input
 
 		if( Equal(para_1st,"-exit") || Equal(para_1st,"exit") )						//exit
@@ -1235,71 +1235,72 @@ void Iterater()
 
 /*******************************************************
 Function:
-	"numbers" people numbered off, the one who yells "keys" 
+	"numbers" people numbered off, the one who yells "number" 
 	number will be excuted. Who can survive at last?
 Argument:int int
 Return	:None
 *******************************************************/
-void LastOne(int numbers,int keys)//numbers is people's numbers, keys is the "death" number
+void LastOne(int peoples,int number)//peoples is people's numbers, number is the "death" number
 {
 	int i=0;
-	MAN *p,*pt,*pp;//pt to p this       pp to p previous.
-	//p is used for make new data.
-	//pt is current data.
-	//pp always cache pt.
-	//data1  to   data2   to    data3(new one)
-	//pp          pt             p
+	MAN *p_new=NULL;						//point to the new one
+	MAN *p_this=NULL;						//point to the this
+	MAN *p_cache=NULL;						//point to the previous one
+	MAN *head=NULL;							//the a head
+
+	//*****************************************************************
+	//data1   to  data2   to   data3(new one)
+	//p_cache     p_this       p_new
+	//*****************************************************************
 
 	//to make this circle(below)
-	MAN *head=NULL;	//new a head
-	for(i=1;i<=numbers;i++)
+	for(i=1;i<=peoples;i++)
 	{
-		p=(MAN *)malloc(sizeof(MAN));
-		p->num=i;
-		if(head==NULL)//linked list is NULL
+		p_new=(MAN *)malloc(sizeof(MAN));	//new an area
+		p_new->num=i;						//set number to this people
+		
+		if(head==NULL)						//if this linked list is NULL
 		{			
-			head=p;
-			pt=p;
+			head=p_new;						//set new area to the head, so we could locate the very first area by using head
+			p_this=p_new;					//use p_this as a cursor to build the list
 		}			
 		else
 		{
-			pt->next=p;
-			pt=p;
+			p_this->next=p_new;				//add the new one to the end of the list
+			p_this=p_new;					//then jump to the new one
 		}
 	}
+	
+	p_cache=p_this;							//use p_cache back up the current place
+	p_this->next=head;						//to make it a circle
 
-	//pt=head;//find the last one
-	//while(pt->num!=numbers)
-	//{
-	//	pt=pt->next;
-	//}
-	pp=pt;//make the cache equal the last people
-	pt->next=head;//to make it a circle
-	pt=head;//from the start
-	i=0;
+	
+	i=0;									//reset the counter
+	p_this=head;							//from the start
 	while(1)
 	{
 		i++;
-		printf("I'm No.%-3d %-2d times\n",pt->num,(i%keys)+(i%keys==0?keys:0));//report current person's number
-		if(i%keys==0)//kill this person
+		printf("I'm No.%-3d %-2d times\n",p_this->num,( i%number )+( i%number==0 ? number : 0 ));	//report current person's number
+		if(i%number==0)//kill this person
 		{
-			printf("No.%d has been killed\n\n",pt->num);//tell everyone this person has been killed
-			pp->next=pt->next;
-			//delete this data.
-			//pp is cache of pt.pp->next=pt->next means jump over pt,means delete this person
-			pt=pt->next;
+			printf("No.%d has been killed\n\n",p_this->num);										//tell everyone this person has been killed
+			p_cache->next=p_this->next;
+			//delete this data(by jump over)
+			//p_cache is the cache of p_this. "p_cache->next=p_this->next" means jump over p_this, means delete this person
+			p_this=p_this->next;																	//move on
 		}
 		else//not me, go ahead
 		{
-			pp=pt;
-			pt=pt->next;
+			p_cache=p_this;
+			p_this=p_this->next;
 		}
-		if(pt->next==pt)//only one person
-			break;
+		if(p_this->next==p_this)break;																//only one person remains
 	}
+
+	//report the result
 	printf("\n");
 	printf("Last surviver is:\n");
-	printf("No.%d\n",pt->num);
+	printf("No.%d\n",p_this->num);
 	printf("Congradulations!!!\n");
 }
 
