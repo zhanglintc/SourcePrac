@@ -1262,21 +1262,20 @@ void LastOne(int peoples,int number)//peoples is people's numbers, number is the
 		if(head==NULL)						//if this linked list is NULL
 		{			
 			head=p_new;						//set new area to the head, so we could locate the very first area by using head
-			p_this=p_new;					//use p_this as a cursor to build the list
+			p_this=head;					//use p_this as a cursor to build the list, from head
 		}			
 		else
 		{
 			p_this->next=p_new;				//add the new one to the end of the list
+			p_cache=p_this;					//use p_cache back up the current place
 			p_this=p_new;					//then jump to the new one
 		}
 	}
 	
-	p_cache=p_this;							//use p_cache back up the current place
 	p_this->next=head;						//to make it a circle
-
-	
-	i=0;									//reset the counter
 	p_this=head;							//from the start
+	i=0;									//reset the counter
+	
 	while(1)
 	{
 		i++;
