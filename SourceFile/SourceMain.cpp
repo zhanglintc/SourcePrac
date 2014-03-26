@@ -20,6 +20,7 @@
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	printf("↑  ↑ しています  好的");
 	Initialize();
 	ControlDock();
 
