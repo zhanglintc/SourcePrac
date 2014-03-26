@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 
 char *lexicon90k_1[]={
 "AAA",
