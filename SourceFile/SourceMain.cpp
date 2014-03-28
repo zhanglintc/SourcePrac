@@ -11,16 +11,16 @@
 //-----theodolite-----
 //2014.03.20 ZhangLin -E
 
-//some modification made by lane
-//some modification made by lane again
-//some modification made by lane again and again
-//some modification made by bernard 1st
-//org from bernard
-//org from lane
+wchar_t* str1=L"桃贼賊";
+char str2[]={0x68,0x43,0};
+char str3[]={0x43,0x68,0};
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	printf("↑  ↑ しています  好的");
+	_tsetlocale(LC_ALL, L"CHS");
+	//setlocale(LC_ALL,"CHS");
+	wprintf(L"%s",str1);
+	
 	Initialize();
 	ControlDock();
 
