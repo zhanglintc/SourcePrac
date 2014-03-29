@@ -4,6 +4,13 @@
 #include "headers.h"
 
 #define _INTSIZEOF(n)   ( (sizeof(n) + sizeof(int) - 1) & ~(sizeof(int) - 1) )
+
+//#define printf(fmt, args...) myprintf(fmt, ##args)
+//#define DEBUG_PRINT(x,...) wprintf(x,__VA_ARGS__)
+//#define LOG(format, ...) printf(format,__VA_ARGS__)
+//#define DEBUG_PRINT#(
+#define DEBUG_PRINT minprintf
+
 //2014.03.20 ZhangLin -S
 //ADVANCED LEARNER'S English-Chinese Dictionary
 //roll 2056 resulted 1830
@@ -11,7 +18,8 @@
 //-----theodolite-----
 //2014.03.20 ZhangLin -E
 
-wchar_t* str1=L"桃贼賊";
+char str0[][5]={{"abcd"},{"cde"}};
+wchar_t str1[]={L"桃111111111"};
 char str2[]={0x68,0x43,0};
 char str3[]={0x43,0x68,0};
 
@@ -19,7 +27,10 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	_tsetlocale(LC_ALL, L"CHS");
 	//setlocale(LC_ALL,"CHS");
-	wprintf(L"%s",str1);
+	//printf(("%d",str0));
+	//DEBUG_PRINT(("%s\n",str1));
+	//minprintf("%s",str1);
+	DEBUG_PRINT("%s",str1);
 	
 	Initialize();
 	ControlDock();

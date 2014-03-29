@@ -37,6 +37,73 @@ Argument:... *
 Return	:None
 *******************************************************/
 void minprintf(char *fmt, ...)
+{
+/*//below is the test code
+	int i = 1234;
+	int j = 5678;
+	char *s="nihao";
+	double f=0.11f;
+	fum(1,2,3,4,5,6,7);
+	minprintf("the first test:i=%d\n",i,j);
+
+	minprintf("the secend test:i=%d; %x;j=%d;\n",i,0xabcd,j);
+	minprintf("the 3rd test:s=%s\n",s);
+	minprintf("the 4th test:f=%f\n",f);
+	minprintf("the 5th test:s=%s,f=%f\n",s,f);
+//above is the test code*/
+
+	va_list ap; /* points to each unnamed arg in turn */
+	char *p;
+	wchar_t *sval;
+	int ival;
+	double dval;
+	va_start(ap, fmt); /* make ap point to 1st unnamed arg */
+	for (p = fmt; *p; p++)
+	{
+		if (*p != '%') 
+		{
+			putchar(*p);
+			continue;
+		}
+		switch (*++p)
+		{
+			 case 'd':
+					ival = va_arg(ap, int);
+					printf("%d", ival);
+					break;
+			 case 'x':
+					ival=va_arg(ap,int);
+					printf("%#x",ival);
+					break;
+			 case 'f':
+					dval = va_arg(ap, double);
+					printf("%f", dval);
+					break;
+			 case 's':
+					sval = va_arg(ap, wchar_t *);
+					wprintf(L"%s", sval);
+					//for (sval = va_arg(ap, wchar_t *); *sval; sval++)
+					//{
+					//	putchar(*sval);
+					//}
+					break;
+			 default:
+					putchar(*p);
+					break;
+		  }
+   }
+   va_end(ap); /* clean up when done */
+}
+
+
+/*******************************************************
+Function:
+	Another function for the uncertain parameters functions study.
+Argument:... *
+Return	:None
+*******************************************************/
+#if 0
+void minprintf(char *fmt, ...)
 
 {
 /*//below is the test code
@@ -92,7 +159,7 @@ void minprintf(char *fmt, ...)
    }
    va_end(ap); /* clean up when done */
 }
-
+#endif
 
 /*******************************************************
 Function:
