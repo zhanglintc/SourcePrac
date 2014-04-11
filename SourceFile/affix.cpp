@@ -1,5 +1,4 @@
 ﻿#include "stdafx.h"
-#include "stdio.h"
 #include "headers.h"
 
 
