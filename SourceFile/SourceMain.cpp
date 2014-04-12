@@ -18,19 +18,9 @@
 //-----theodolite-----
 //2014.03.20 ZhangLin -E
 
-char str0[][5]={{"abcd"},{"cde"}};
-wchar_t str1[]={L"桃111111111"};
-char str2[]={0x68,0x43,0};
-char str3[]={0x43,0x68,0};
-
 int _tmain(int argc, _TCHAR* argv[])
 {
 	_tsetlocale(LC_ALL, L"CHS");
-	//setlocale(LC_ALL,"CHS");
-	//printf(("%d",str0));
-	//DEBUG_PRINT(("%s\n",str1));
-	//minprintf("%s",str1);
-	DEBUG_PRINT("%s",str1);
 	
 	Initialize();
 	ControlDock();
