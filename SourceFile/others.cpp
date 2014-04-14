@@ -326,3 +326,420 @@ void Iterater()
     if(var=='y')Iterater();
     printf("out\n");
 }
+
+/*******************************************************
+Function:
+    for the uncertain parameters functions study.
+Argument:... *
+Return  :None
+*******************************************************/
+void UncertainParaTestFun(int Para, ...)
+{
+/*
+typedef char *  va_list;
+
+#define _INTSIZEOF(n)   ( (sizeof(n) + sizeof(int) - 1) & ~(sizeof(int) - 1) )
+
+#define va_start(ap,v)  ( ap = (va_list)&v + _INTSIZEOF(v) )
+#define va_arg(ap,t)    ( *(t *)((ap += _INTSIZEOF(t)) - _INTSIZEOF(t)) )
+#define va_end(ap)      ( ap = (va_list)0 )
+*/
+    va_list Valist_P;
+    va_start(Valist_P,Para);            //va_start(), make Valist_P point to the Para
+    while(Para!=0)
+    {
+        printf("%d\n",Para);
+        Para=va_arg(Valist_P,int);      //va_arg(), make Valist_P point to the one after Para, and then return the value of Para
+    }
+    va_end(Valist_P); /* clean up when done */
+}
+
+
+/*******************************************************
+Function:
+    Another function for the uncertain parameters functions study.
+Argument:... *
+Return  :None
+*******************************************************/
+void minprintf(char *fmt, ...)
+{
+/*//below is the test code
+    int i = 1234;
+    int j = 5678;
+    char *s="nihao";
+    double f=0.11f;
+    fum(1,2,3,4,5,6,7);
+    minprintf("the first test:i=%d\n",i,j);
+
+    minprintf("the secend test:i=%d; %x;j=%d;\n",i,0xabcd,j);
+    minprintf("the 3rd test:s=%s\n",s);
+    minprintf("the 4th test:f=%f\n",f);
+    minprintf("the 5th test:s=%s,f=%f\n",s,f);
+//above is the test code*/
+
+    va_list ap; /* points to each unnamed arg in turn */
+    char *p;
+    wchar_t *sval;
+    int ival;
+    double dval;
+    va_start(ap, fmt); /* make ap point to 1st unnamed arg */
+    for (p = fmt; *p; p++)
+    {
+        if (*p != '%') 
+        {
+            putchar(*p);
+            continue;
+        }
+        switch (*++p)
+        {
+             case 'd':
+                    ival = va_arg(ap, int);
+                    printf("%d", ival);
+                    break;
+             case 'x':
+                    ival=va_arg(ap,int);
+                    printf("%#x",ival);
+                    break;
+             case 'f':
+                    dval = va_arg(ap, double);
+                    printf("%f", dval);
+                    break;
+             case 's':
+                    sval = va_arg(ap, wchar_t *);
+                    wprintf(L"%s", sval);
+                    //for (sval = va_arg(ap, wchar_t *); *sval; sval++)
+                    //{
+                    //  putchar(*sval);
+                    //}
+                    break;
+             default:
+                    putchar(*p);
+                    break;
+          }
+   }
+   va_end(ap); /* clean up when done */
+}
+
+
+/*******************************************************
+Function:
+    Another function for the uncertain parameters functions study.
+Argument:... *
+Return  :None
+*******************************************************/
+#if 0
+void minprintf(char *fmt, ...)
+
+{
+/*//below is the test code
+    int i = 1234;
+    int j = 5678;
+    char *s="nihao";
+    double f=0.11f;
+    fum(1,2,3,4,5,6,7);
+    minprintf("the first test:i=%d\n",i,j);
+
+    minprintf("the secend test:i=%d; %x;j=%d;\n",i,0xabcd,j);
+    minprintf("the 3rd test:s=%s\n",s);
+    minprintf("the 4th test:f=%f\n",f);
+    minprintf("the 5th test:s=%s,f=%f\n",s,f);
+//above is the test code*/
+
+    va_list ap; /* points to each unnamed arg in turn */
+    char *p, *sval;
+    int ival;
+    double dval;
+    va_start(ap, fmt); /* make ap point to 1st unnamed arg */
+    for (p = fmt; *p; p++)
+    {
+        if (*p != '%') 
+        {
+            putchar(*p);
+            continue;
+        }
+        switch (*++p)
+        {
+             case 'd':
+                    ival = va_arg(ap, int);
+                    printf("%d", ival);
+                    break;
+             case 'x':
+                    ival=va_arg(ap,int);
+                    printf("%#x",ival);
+                    break;
+             case 'f':
+                    dval = va_arg(ap, double);
+                    printf("%f", dval);
+                    break;
+             case 's':
+                    for (sval = va_arg(ap, char *); *sval; sval++)
+                    {
+                        putchar(*sval);
+                    }
+                    break;
+             default:
+                    putchar(*p);
+                    break;
+          }
+   }
+   va_end(ap); /* clean up when done */
+}
+#endif
+
+void recursion()
+{
+    static int i=0;
+    i+=1;
+    if(i!=100)recursion();
+    printf("%d\n",i);
+}
+
+void Big_Little_Endian_Judge()
+{
+    K_MSG MSG;
+    int a=0x12346578;
+    memcpy(MSG.abData,MSG.abData,sizeof(MSG.abData));
+    TEST *p,*p1,*p2;
+    p=(TEST *)MSG.abData;
+    p->test1_1=1;
+    p->test2=2;
+    p1=(TEST *)p->test_next;
+    p1->test1_2=3;
+    p1->test2=4;
+    p2=(TEST *)&MSG.abData[63];
+    //p2->test1=5;
+    MSG.abData[0]=0xab;
+
+    uchar *pp=(uchar *)&a;
+    if(0x78==*pp)
+    {
+        printf("little endian\n");
+    }
+    else
+    {
+        printf("big endian\n");
+    }
+}
+
+/******************************************************/
+bool findchar(char* string,char temp)
+{
+    int index=0;
+    while(*string!='\0' &&*string++ !=temp  )index++;
+    return index>GetLength(string)? false :true;
+}
+/******************************************************/
+
+/*******************************************************
+Function:None
+Argument:None
+Return:None
+2014.03.12 zhanglin:
+    Lexicon.dat is missing, so make this invalid
+*******************************************************/
+/*
+void CheckLexicon(char *data,int st,int end)
+{
+    int i,k;
+    if(st>end)
+    {
+        for(k=0;k<CountArrayLength((int *)&lexicon8k);k++)
+        {
+            if(strcmp(data,lexicon8k[k])==0)
+            {
+                printf("%s\n", data);
+            }
+        }
+    }
+    else
+    {
+        for(i=st;i<=end;i++)
+        {
+            swap(&data[st],&data[i]);
+            CheckLexicon(data,st+1,end);
+            swap(&data[st],&data[i]);
+        }
+    }
+}
+*/
+
+//********************************************************************************************
+//********************************************************************************************
+//********************************************************************************************
+//********************************************************************************************
+//********************************************************************************************
+
+/*******************************************************
+Function:Frame of count day in a year
+Argument:None
+Return  :None
+*******************************************************/
+void DateCalcMain()
+{
+    char StrIn[10];
+    int year=0,month=0,day=0;
+    printf("Please input year:");
+    scanf("%s",&StrIn);
+    getchar();
+    while(CheckData(StrIn,"year",year,month,day)==false)
+    {
+        printf("Please input year:");
+        scanf("%s",&StrIn);
+        getchar();
+    }
+    year=Str2Int(StrIn);
+    printf("Please input month:");
+    scanf("%s",&StrIn);
+    getchar();
+    while(CheckData(StrIn,"month",year,month,day)==false)
+    {
+        printf("Please input month:");
+        scanf("%s",&StrIn);
+        getchar();
+    }
+    month=Str2Int(StrIn);
+    printf("Please input day:");
+    scanf("%s",&StrIn);
+    getchar();
+    while(CheckData(StrIn,"day",year,month,Str2Int(StrIn))==false)
+    {
+        printf("Please input day:");
+        scanf("%s",&StrIn);
+        getchar();
+    }
+    day=Str2Int(StrIn);
+    CalcDate(year,month,day);
+}
+/*******************************************************
+Function:Leap year judge
+Argument:int
+Return  :bool
+*******************************************************/
+bool isLeapYear(int data)
+{
+    if(data%4==0&&data%100!=0)
+    {
+        //printf("leap\n");
+        return true;
+    }
+    else if(data%400==0&&data%100==0)
+    {
+        //printf("leap\n");
+        return true;
+    }
+    //printf("not leap\n");
+    return false;
+}
+
+/*******************************************************
+Function:Check the input valid or not
+Argument:char[],char [],int ,int ,int
+     data[]:input data
+     type[]:data type(year, month, day, etc)
+     year,month,day:time data
+Return:int
+*******************************************************/
+//check if input is valid
+bool CheckData(char data[],char type[10],int year,int month,int day)
+{
+    for(int i=0;i<GetLength(data);i++)//not numbers
+    {
+        if(data[i]<48||data[i]>57)
+        {
+            printf("Word is not allowed\n\n");
+            return false;
+        }
+    }
+    if(type=="year")
+    {
+        if (GetLength(data)>4)
+        {
+            printf("Data length is out of bound\n\n");
+            return false;
+        }
+        isLeapYear(Str2Int(data));
+    }
+    if(type=="month")
+    {
+        if (GetLength(data)>2)
+        {
+            printf("Data length is out of bound\n\n");
+            return false;
+        }
+        if(Str2Int(data)>12||Str2Int(data)<1)
+        {
+            printf("Data is not valid\n\n");
+            return false;
+        }
+    }
+    if(type=="day")
+    {
+        if (GetLength(data)>2)
+        {
+            printf("Data length is out of bound\n\n");
+            return false;
+        }
+        if(Str2Int(data)>31||Str2Int(data)<1)
+        {
+            printf("Data is not valid\n\n");
+            return false;
+        }
+        if(isLeapYear(year)==true&&month==2&&day>29)
+        {
+            printf("Data is not valid\n\n");
+            return false;
+        }
+        else if(isLeapYear(year)==false&&month==2&&day>28)
+        {
+            printf("Data is not valid\n\n");
+            return false;
+        }
+        if((month==4||month==6||month==9||month==11)&&day>30)
+        {
+            printf("Data is not valid\n\n");
+            return false;
+        }
+    }
+    return true;
+}
+
+/*******************************************************
+Function:None
+Argument:date
+Return  :None
+*******************************************************/
+void CalcDateinterface(date date)
+{
+    CalcDate(date.year,date.month,date.day);
+}
+
+/*******************************************************
+Function:Core of count the day in a year
+Argument:int ,int ,int 
+Return:void
+*******************************************************/
+void CalcDate(int year,int month,int day)
+{
+    int ret=0;
+    switch(month)
+    {
+        case 1:ret+=day;break;
+        case 2:ret=31+day;break;
+        case 3:ret=31+28+day;break;
+        case 4:ret=31+28+31+day;break;
+        case 5:ret=31+28+31+30+day;break;
+        case 6:ret=31+28+31+30+31+day;break;
+        case 7:ret=31+28+31+30+31+30+day;break;
+        case 8:ret=31+28+31+30+31+30+31+day;break;
+        case 10:ret=31+28+31+30+31+30+31+31+30+day;break;
+        case 11:ret=31+28+31+30+31+30+31+31+30+31+day;break;
+        case 12:ret=31+28+31+30+31+30+31+31+30+31+30+day;break;
+    }
+    if(month>=2&&isLeapYear(year)==true)ret+=1;
+    printf("It is the %d days of this year\n",ret);
+}
+//********************************************************************************************
+//********************************************************************************************
+//********************************************************************************************
+//********************************************************************************************
+//********************************************************************************************
