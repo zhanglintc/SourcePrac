@@ -3,6 +3,108 @@
 
 /*******************************************************
 Function:
+	convert cars's value.
+Argument:
+	Cards card[]
+Return:
+	true for need card
+	false for not need card
+*******************************************************/
+bool TwentyOnePointAI(Cards card[])
+{
+	//todo: add request card judgement
+	return true;
+}
+
+/*******************************************************
+Function:
+	convert cars's value.
+Argument:
+	Cards card
+Return:
+	float
+*******************************************************/
+float TwentyOnePointConvertor(Cards card)
+{
+	float pts = 0;					//init pts
+	switch (card.point_int)			//switch
+	{
+		case Ace:					//Ace is one point
+			pts = 1;
+			break;
+		case Jack:					//Jack is 0.5 point
+			pts = 0.5;
+			break;
+		case Queen:					//Queen is 0.5 point
+			pts = 0.5;
+			break;
+		case King:					//King is 0.5 point
+			pts = 0.5;
+			break;
+		default:					//others is its original value
+			pts = (float)card.point_int;
+			break;
+	}
+	return pts;						//return pts
+}
+
+/*******************************************************
+Function:
+	calculate input cards array's value.
+Argument:
+	Cards cards[]
+Return:
+	float pts
+*******************************************************/
+float TwentyOnePointCalculator(Cards cards[])
+{
+	int i=0;						//index
+	float pts=0;					//points
+
+	for(i=0;i<CountArrayLength(cards);i++)	//calculate the sum of input cards array
+	{
+		pts+=TwentyOnePointConvertor(cards[i]);
+	}
+
+	return pts;						//return
+}
+
+/*******************************************************
+Function:
+	21points game.
+Argument:None
+Return	:None
+*******************************************************/
+void TwentyOnePointGame()
+{
+	Cards cards[54];													//cards array
+	int Available_List[54];												//available list
+	int i=0;															//index
+
+	memset(Available_List,AVAILABLE,sizeof(Available_List));			//init
+	memset(cards,0,sizeof(cards));										//init
+
+	cards[0]=CardGenerator(Available_List, NOJOKER);					//get the hand card
+
+	printf("Card : %s %s\n", cards[0].suit_str, cards[0].point_str);	//debug info
+
+	i=1;
+	//while(TwentyOnePointAI)
+	while(TwentyOnePointCalculator(cards)<=21)
+	{
+		cards[i]=CardGenerator(Available_List, NOJOKER);
+		i++;
+	}
+	printf("last point: %.1f\n",TwentyOnePointCalculator(cards));
+
+	for(i=0;i<CountArrayLength(cards);i++)
+	{
+		printf("Card : %s %s\n", cards[i].suit_str, cards[i].point_str);
+	}
+}
+
+/*******************************************************
+Function:
 	Convert and card's Uni_Num to card's Int and set Int to card
 Argument:Cards *
 Return	:None

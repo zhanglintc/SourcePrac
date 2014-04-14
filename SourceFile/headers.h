@@ -175,6 +175,8 @@ void CardUni2Int(Cards *card);
 void CardInt2StrConvertor(Cards *card);
 void UncertainParaTestFun(int a, ...);
 void minprintf(char *fmt, ...);
+void TwentyOnePointGame();
+void LANE20140414();
 
 //int
 int GetLength(char []);
@@ -185,7 +187,12 @@ int Factorial(int data);
 int randnum(int min,int max);
 int roll(char *, char *);
 int CountArrayLength(int arr[]);
+int CountArrayLength(Cards *cards);
 int ThreeCardBrag(Cards *card_1st, Cards *card_2nd, Cards *card_3rd, char type);
+
+//float
+float TwentyOnePointCalculator(Cards cards[]);
+float TwentyOnePointConvertor(Cards card);
 
 //bool
 bool CheckData(char [],char [],int ,int ,int);

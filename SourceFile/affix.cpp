@@ -327,6 +327,7 @@ Function:
 	than 4. arr is a pointer, point to int, length 4.
 	length of pointer is 4, too. thus this function 
 	can count an array which elements are pointers.
+	(the comment above is not correct -- 2014.04.14 zhanglin)
 Arguement:int *
 Return:length
 *******************************************************/
@@ -334,5 +335,20 @@ int CountArrayLength(int *arr)				//point to 4 length datas
 {
 	int i=0;
 	for(i=0;*(arr+i);i++);					//if arr[i] contains things, i++
+	return i;
+}
+
+/*******************************************************
+Function:
+	calculate one cards array's length
+Arguement:
+	Cards *cards
+Return:
+	length
+*******************************************************/
+int CountArrayLength(Cards *cards)
+{
+	int i=0;
+	for(i=0;(cards[i].point_int);i++);
 	return i;
 }
