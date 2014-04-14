@@ -287,7 +287,7 @@ void CallLastOne()
 	
 	while(true)
 	{
-		printf("\nControlDock\\LastOne>(peoples,number)");							//welcome words
+		printf("ControlDock\\LastOne>(peoples,number)");							//welcome words
 		GetCommand(para_1st,para_2nd,para_3rd);										//get input
 
 		if( Equal(para_1st,"-exit") || Equal(para_1st,"exit") )						//exit
@@ -849,10 +849,13 @@ void ControlDock(void)
 	memset(command,'\0',COMMAND_STR_LEN);					//initialize command
 	memset(para_1st,'\0',COMMAND_STR_LEN);					//initialize parameter 1st
 	memset(para_2nd,'\0',COMMAND_STR_LEN);					//initialize parameter 2nd
+
+	printf("ControlDock [Version Alpha]\n");				//2014.04.14 added
+	printf("Powered by zhanglintc. Nothing reserved.\n\n");	//2014.04.14 added
 	
 	while(true)																	//Loops, waiting for the command
 	{
-		printf("\nControlDock>");												//Always prompt "ControlDock>"
+		printf("ControlDock>");													//Always prompt "ControlDock>"
 		GetCommand(command,para_1st,para_2nd);									//Then get the user's command
 		
 		//Exit
@@ -865,6 +868,7 @@ void ControlDock(void)
 		else if( Equal(command,"cls") || Equal(command,"-cls") )
 		{
 			system("cls");
+			printf("\n");  //2014.04.14 added
 		}
 		
 		//No input, do nothing, just show a new prompt
