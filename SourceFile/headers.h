@@ -14,24 +14,24 @@
 /*******************************************************************************/
 //defines
 /*******************************************************************************/
-#define MIN_WORD_LENGTH			0
-#define INPUT_STRING_LEN		300
-#define COMMAND_STR_LEN			100
-#define NO_RESTRICT_LENGTH		0
-#define NO_RESTRICT_KEYWORD		0
-#define ERROR_MARK				-1
-#define NON_AVAILABLE			1
-#define AVAILABLE				0
-#define JOKER					true
-#define NOJOKER					false
+#define MIN_WORD_LENGTH			0		//minimum length of required word
+#define INPUT_STRING_LEN		300		//input length
+#define COMMAND_STR_LEN			100		//command length
+#define NO_RESTRICT_LENGTH		0		//word's length no limitation
+#define NO_RESTRICT_KEYWORD		0		//keyword no limitation
+#define ERROR_MARK				-1		//means something wrong
+#define NON_AVAILABLE			1		//not available
+#define AVAILABLE				0		//available
+#define JOKER					true	//with jokers
+#define NOJOKER					false	//with out jokers
 
 //defines for ThreeCardBrag -S
 #define Spade					0
 #define Heart					1
 #define Club					2
 #define Diamond					3
-#define Black_Joker				52//card uni_number from 0 to 53, thus Black_Joker is 52
-#define Red_Joker				53//card uni_number from 0 to 53, thus Black_Joker is 53
+#define Black_Joker				52		//card uni_number from 0 to 53, thus Black_Joker is 52
+#define Red_Joker				53		//card uni_number from 0 to 53, thus Black_Joker is 53
 
 #define Ace						1
 #define Jack					11
