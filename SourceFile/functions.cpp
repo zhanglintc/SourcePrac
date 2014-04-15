@@ -1,19 +1,48 @@
 ﻿#include "stdafx.h"
 #include "headers.h"
 
+float TwentyOnePointOverflowProbability(Cards cards[], int Available_List[])
+{
+	float currentPts = 0;
+	float capacity = 0;
+	int i = 0;
+	int numerator = 0;
+	int denominator = 52;
+
+	currentPts = TwentyOnePointCalculator(cards);
+	capacity = 21 - currentPts;
+	//calculate probabiblity of card's value no more than capacity
+	for(i=0;i<52;i++)
+	{
+		if(TwentyOnePointConvertor(cards[i]) <= capacity && Available_List[i]==AVAILABLE)
+		{
+			numerator++;
+		}
+	}
+
+	return (float)numerator/denominator;
+}
+
 /*******************************************************
 Function:
-	convert cars's value.
+	AI decide require card or not (alpha)
 Argument:
 	Cards card[]
 Return:
 	true for need card
 	false for not need card
 *******************************************************/
-bool TwentyOnePointAI(Cards card[])
+bool TwentyOnePointAI(Cards cards[], int Available_List[])
 {
 	//todo: add request card judgement
-	return true;
+	if(TwentyOnePointOverflowProbability(cards, Available_List) >= 0.5)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 /*******************************************************
@@ -90,7 +119,7 @@ void TwentyOnePointGame()
 
 	i=1;
 	//while(TwentyOnePointAI)
-	while(TwentyOnePointCalculator(cards)<=21)
+	while(TwentyOnePointAI(cards, Available_List))
 	{
 		cards[i]=CardGenerator(Available_List, NOJOKER);
 		i++;

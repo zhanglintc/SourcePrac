@@ -193,6 +193,7 @@ int ThreeCardBrag(Cards *card_1st, Cards *card_2nd, Cards *card_3rd, char type);
 //float
 float TwentyOnePointCalculator(Cards cards[]);
 float TwentyOnePointConvertor(Cards card);
+float TwentyOnePointOverflowProbability(Cards cards[], int Available_List[]);
 
 //bool
 bool CheckData(char [],char [],int ,int ,int);
@@ -203,6 +204,7 @@ bool isStraightFlush(Cards *card_1st, Cards *card_2nd, Cards *card_3rd);
 bool isFlush(Cards *card_1st, Cards *card_2nd, Cards *card_3rd);
 bool isStraight(Cards *card_1st, Cards *card_2nd, Cards *card_3rd);
 bool isPairs(Cards *card_1st, Cards *card_2nd, Cards *card_3rd);
+bool TwentyOnePointAI(Cards cards[], int Available_List[]);
 
 //others
 Cards CardGenerator(int Available_List[54], bool with_joker);
