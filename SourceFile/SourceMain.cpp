@@ -20,8 +20,6 @@
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	_tsetlocale(LC_ALL, L"CHS"); // todo: put this into Initialize()
-	
 	Initialize();
 	//ControlDock();
 	TwentyOnePointGame();

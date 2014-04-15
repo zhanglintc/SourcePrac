@@ -612,7 +612,8 @@ Return	:None
 *******************************************************/
 void Initialize()
 {
-	srand((unsigned)time(NULL));						//Random number seed initial, 2014.03.16 zhanglin
+	_tsetlocale(LC_ALL, L"CHS"); 		//set locale codepage (Chinese)
+	srand((unsigned)time(NULL));		//Random number seed initial, 2014.03.16 zhanglin
 }
 
 /*******************************************************
