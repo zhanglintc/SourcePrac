@@ -7,16 +7,33 @@ float TwentyOnePointOverflowProbability(Cards cards[], int Available_List[])
 	float capacity = 0;
 	int i = 0;
 	int numerator = 0;
-	int denominator = 52;
+	int denominator = 0;
+	Cards all_cards[52];
 
 	currentPts = TwentyOnePointCalculator(cards);
 	capacity = 21 - currentPts;
+
+	for(i=0;i<52;i++)
+	{
+		all_cards[i].uni_num=i;
+		CardUni2Int(&all_cards[i]);											//Convert Uni_Num to Int, and set it to card
+		CardInt2StrConvertor(&all_cards[i]);								//set this card's string
+	}
+
 	//calculate probabiblity of card's value no more than capacity
 	for(i=0;i<52;i++)
 	{
-		if(TwentyOnePointConvertor(cards[i]) <= capacity && Available_List[i]==AVAILABLE)
+		if(TwentyOnePointConvertor(all_cards[i]) <= capacity && Available_List[i]==AVAILABLE)
 		{
 			numerator++;
+		}
+	}
+	
+	for(i=0;i<52;i++)
+	{
+		if(Available_List[i]==AVAILABLE)
+		{
+			denominator++;
 		}
 	}
 
