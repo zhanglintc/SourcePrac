@@ -1,31 +1,40 @@
 ﻿#include "stdafx.h"
 #include "headers.h"
 
+
+/*******************************************************
+Function:
+	calulate probability of overflow if ask another card
+Argument:
+	Cards cards[], int Available_List[]
+Return:
+	float: overflow probability
+*******************************************************/
 float TwentyOnePointOverflowProbability(Cards cards[], int Available_List[])
 {
-	float currentPts = 0;
-	float capacity = 0;
-	int i = 0;
-	int numerator = 0;
-	int denominator = 0;
-	Cards all_cards[52];
+	int i = 0;				//index
+	int numerator = 0;		//A in A/B
+	int denominator = 0;	//B in A/B
+	float currentPts = 0;	//current POINT
+	float capacity = 0;		//hwo to describle?
+	Cards Card_Set[52];	
 
 	currentPts = TwentyOnePointCalculator(cards);
 	capacity = 21 - currentPts;
 
-	for(i=0;i<52;i++)
+	for(i=0;i<52;i++)								//initialieze card set
 	{
-		all_cards[i].uni_num=i;
-		CardUni2Int(&all_cards[i]);											//Convert Uni_Num to Int, and set it to card
-		CardInt2StrConvertor(&all_cards[i]);								//set this card's string
+		Card_Set[i].uni_num=i;						//get uninum
+		CardUni2Int(&Card_Set[i]);					//Convert Uni_Num to Int, and set it to card
+		CardInt2StrConvertor(&Card_Set[i]);			//set this card's string
 	}
 
 	//calculate probabiblity of card's value no more than capacity
 	for(i=0;i<52;i++)
 	{
-		if(TwentyOnePointConvertor(all_cards[i]) <= capacity && Available_List[i]==AVAILABLE)
+		if(TwentyOnePointConvertor(Card_Set[i]) <= capacity && Available_List[i]==AVAILABLE)
 		{
-			numerator++;
+			numerator++; 	//A in A/B
 		}
 	}
 	
@@ -33,11 +42,11 @@ float TwentyOnePointOverflowProbability(Cards cards[], int Available_List[])
 	{
 		if(Available_List[i]==AVAILABLE)
 		{
-			denominator++;
+			denominator++;	//B in A/B
 		}
 	}
 
-	return (float)numerator/denominator;
+	return (float)numerator/denominator; //return probabiblity
 }
 
 /*******************************************************
@@ -52,11 +61,11 @@ Return:
 bool TwentyOnePointAI(Cards cards[], int Available_List[])
 {
 	//todo: add request card judgement
-	if(TwentyOnePointOverflowProbability(cards, Available_List) >= 0.5)
+	if(TwentyOnePointOverflowProbability(cards, Available_List) > 0.5) //more than 50%
 	{
 		return true;
 	}
-	else
+	else //less than 50%
 	{
 		return false;
 	}
@@ -64,7 +73,7 @@ bool TwentyOnePointAI(Cards cards[], int Available_List[])
 
 /*******************************************************
 Function:
-	convert cars's value.
+	convert and return cars's value.
 Argument:
 	Cards card
 Return:
@@ -117,7 +126,9 @@ float TwentyOnePointCalculator(Cards cards[])
 
 /*******************************************************
 Function:
-	21points game.
+	21points game. AI first, player after. One's card's
+	value should no more than 21, the one whoes value bigger
+	wins the game.
 Argument:None
 Return	:None
 *******************************************************/
@@ -127,34 +138,76 @@ void TwentyOnePointGame()
 	Cards Player_Cards[54];
 	int Available_List[54];												//available list
 	int i=0;															//index
+	char input[10];
 
 	memset(Available_List,AVAILABLE,sizeof(Available_List));			//init Available_List
 	memset(AI_Cards,0,sizeof(AI_Cards));								//init AI_Cards
 	memset(Player_Cards,0,sizeof(Player_Cards));						//init Player_Cards
 
-	/* AI turn */
+	/* --------------------AI turn-------------------- */
 	AI_Cards[0]=CardGenerator(Available_List, NOJOKER);					//get the hand card
 
 	printf("AI turn:\n");
-	//printf("Card : %s %s\n", AI_Cards[0].suit_str, AI_Cards[0].point_str);
-	printf("Hole card\n");
+	//printf("Card : %s %s\n", AI_Cards[0].suit_str, AI_Cards[0].point_str); //debug print AI's hole card
+	printf("Hole card: Secret\n");
 	printf("---------\n");
 
-	i=1;
+	i=1;	//AI request card
 	while(TwentyOnePointAI(AI_Cards, Available_List))
 	{
 		AI_Cards[i]=CardGenerator(Available_List, NOJOKER);
 		printf("Card %d: %-7s %s\n", i,AI_Cards[i].suit_str, AI_Cards[i].point_str);
 		i++;
 	}
-	printf("\nLast point: %.1f\n",TwentyOnePointCalculator(AI_Cards));
+	//printf("\nLast point: %.1f\n",TwentyOnePointCalculator(AI_Cards));	//debug print AI's value
 
-	/* Player turn */
-	Player_Cards[0]=CardGenerator(Available_List, NOJOKER);				//get the hand card
+	/* --------------------Player turn-------------------- */
+	Player_Cards[0]=CardGenerator(Available_List, NOJOKER);					//get the hole card
 
 	printf("\n\nPlayer turn:\n");
 	printf("Hole card: %s %s\n", Player_Cards[0].suit_str, Player_Cards[0].point_str);
+	printf("---------");
+
+	i=1;	//Player request card
+	gets(input);
+	while(input[0]!='n' && TwentyOnePointCalculator(Player_Cards)<=21)		//while not 'n' && point is no more than 21
+	{
+		Player_Cards[i]=CardGenerator(Available_List, NOJOKER);
+		printf("Card %d: %-7s %s", i,Player_Cards[i].suit_str, Player_Cards[i].point_str);
+		i++;
+		gets(input);
+	}
+	//printf("\nLast point: %.1f\n",TwentyOnePointCalculator(Player_Cards));	//debug print Player's value
+
+	/* --------------------judgement-------------------- */
+	printf("\n");
 	printf("---------\n");
+	printf("AI point: %.1f\n",TwentyOnePointCalculator(AI_Cards));		//print AI's point
+	printf("Player point: %.1f\n",TwentyOnePointCalculator(Player_Cards));	//print Player's point
+	if(TwentyOnePointCalculator(AI_Cards)>21 && TwentyOnePointCalculator(Player_Cards)>21)
+	{
+		printf("Tied\n");
+	}
+	else if(TwentyOnePointCalculator(AI_Cards)>21)
+	{
+		printf("Player win\n");
+	}
+	else if(TwentyOnePointCalculator(Player_Cards)>21)
+	{
+		printf("AI win\n");
+	}
+	else if(TwentyOnePointCalculator(AI_Cards) == TwentyOnePointCalculator(Player_Cards))
+	{
+		printf("Tied\n");
+	}
+	else if(TwentyOnePointCalculator(AI_Cards) > TwentyOnePointCalculator(Player_Cards))
+	{
+		printf("AI win\n");
+	}
+	else if(TwentyOnePointCalculator(AI_Cards) < TwentyOnePointCalculator(Player_Cards))
+	{
+		printf("Player win\n");
+	}
 }
 
 /*******************************************************
