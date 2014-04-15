@@ -123,30 +123,38 @@ Return	:None
 *******************************************************/
 void TwentyOnePointGame()
 {
-	Cards cards[54];													//cards array
+	Cards AI_Cards[54];													//AI_Cards array
+	Cards Player_Cards[54];
 	int Available_List[54];												//available list
 	int i=0;															//index
 
-	memset(Available_List,AVAILABLE,sizeof(Available_List));			//init
-	memset(cards,0,sizeof(cards));										//init
+	memset(Available_List,AVAILABLE,sizeof(Available_List));			//init Available_List
+	memset(AI_Cards,0,sizeof(AI_Cards));								//init AI_Cards
+	memset(Player_Cards,0,sizeof(Player_Cards));						//init Player_Cards
 
-	cards[0]=CardGenerator(Available_List, NOJOKER);					//get the hand card
+	/* AI turn */
+	AI_Cards[0]=CardGenerator(Available_List, NOJOKER);					//get the hand card
 
-	printf("Card : %s %s\n", cards[0].suit_str, cards[0].point_str);	//debug info
+	printf("AI turn:\n");
+	//printf("Card : %s %s\n", AI_Cards[0].suit_str, AI_Cards[0].point_str);
+	printf("Hole card\n");
+	printf("---------\n");
 
 	i=1;
-	//while(TwentyOnePointAI)
-	while(TwentyOnePointAI(cards, Available_List))
+	while(TwentyOnePointAI(AI_Cards, Available_List))
 	{
-		cards[i]=CardGenerator(Available_List, NOJOKER);
+		AI_Cards[i]=CardGenerator(Available_List, NOJOKER);
+		printf("Card %d: %-7s %s\n", i,AI_Cards[i].suit_str, AI_Cards[i].point_str);
 		i++;
 	}
-	printf("last point: %.1f\n",TwentyOnePointCalculator(cards));
+	printf("\nLast point: %.1f\n",TwentyOnePointCalculator(AI_Cards));
 
-	for(i=0;i<CountArrayLength(cards);i++)
-	{
-		printf("Card : %s %s\n", cards[i].suit_str, cards[i].point_str);
-	}
+	/* Player turn */
+	Player_Cards[0]=CardGenerator(Available_List, NOJOKER);				//get the hand card
+
+	printf("\n\nPlayer turn:\n");
+	printf("Hole card: %s %s\n", Player_Cards[0].suit_str, Player_Cards[0].point_str);
+	printf("---------\n");
 }
 
 /*******************************************************
