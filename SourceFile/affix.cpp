@@ -1,37 +1,51 @@
 ﻿#include "stdafx.h"
 #include "headers.h"
 
-char *StrConcatenate(char *str1, char *str2, ...)
+/*******************************************************
+Function:
+		Concatenate several string.			
+Arguement:
+	int amount:
+		numbers of string to concatenate
+	...:
+		strings to be concatenated
+Return:
+	char *: concatenated string
+*******************************************************/
+char *StrConcatenate(int amount, ...)
 {
-	// va_list ap;
-	// va_arg(ap, char *)
-	// va_end(ap);
-	char* result_str;
-	int i=0;
-	int j=0;
+	int i = 0;			//result string index
+	int j = 0;			//individual string index
+	int times = 0;		//string counter
+	char *in_str;		//input string pointer
+	char *result_str;	//result
+	va_list ap;			//...
 
-	result_str=(char *)malloc(sizeof(str1)+sizeof(str2));
+	va_start(ap, amount);								//start ap
+	result_str = (char *)malloc(100 * sizeof(char *));	//initial result_str (100 char* spaces)
 
-	while(str1[j]!='\0')
+	for(times=0; times<amount; times++)					//concatenate
 	{
-		result_str[i++]=str1[j++];
-	}
-	j=0;
-	while(str2[j]!='\0')
-	{
-		result_str[i++]=str2[j++];
-	}
-	result_str[i]='\0';
+		in_str = va_arg(ap, char *);					//get next string
 
-	return result_str;
+		while(in_str[j] != '\0')						//to the end
+		{
+			result_str[i++] = in_str[j++];				//copy input string to result string
+		}
+
+		j = 0;											//individual index clean
+	}
+
+	va_end(ap);											//end ap
+	result_str[i] = '\0';								//set end mark to the result string
+
+	return result_str;									//return
 }
 
 /*******************************************************
-Function:
-			sort an array from small to large
-			
-Arguement	:int[], int
-Return		:None
+Function :sort an array from small to large			
+Arguement:int[], int
+Return	 :None
 *******************************************************/
 void Sort_Int(int data[],int length)
 {
@@ -261,6 +275,19 @@ int Str2Int(char data[100])
 	{
 		ret+=((data[GetLength(data)-1-i]-48)*((int)pow(10.0,(int)i)));
 	}
+	return ret;
+}
+
+/*******************************************************
+Function	:Int to Str
+Arguement	:int
+Return		:char *
+*******************************************************/
+char *Int2Str(int data)
+{
+	char *ret=(char *)malloc(100 * sizeof(char *));
+	sprintf(ret,"%d",data);
+
 	return ret;
 }
 

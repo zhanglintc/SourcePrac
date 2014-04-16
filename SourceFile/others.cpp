@@ -99,7 +99,7 @@ void SocketServer()
             char buffer[MAXBYTE]={0};
             recv(clientsocket, buffer, MAXBYTE, NULL);              //一直接收客户端socket的send操作
             printf("***Client***    %d: %s\n", i,buffer);
-            msg="Your msg recived!\r\n";
+            msg=StrConcatenate(3,"Your msg No.",Int2Str(i)," recived!\r\n");
             send(clientsocket, msg, strlen(msg)+sizeof(char), NULL);
             if(Equal(buffer,"exit"))
             {
@@ -504,7 +504,7 @@ typedef char *  va_list;
     va_end(Valist_P); /* clean up when done */
 }
 
-
+#if 1
 /*******************************************************
 Function:
     Another function for the uncertain parameters functions study.
@@ -577,7 +577,7 @@ Function:
 Argument:... *
 Return  :None
 *******************************************************/
-#if 0
+#else //#if 1
 void minprintf(char *fmt, ...)
 
 {
@@ -634,7 +634,7 @@ void minprintf(char *fmt, ...)
    }
    va_end(ap); /* clean up when done */
 }
-#endif
+#endif //#if 1
 
 void recursion()
 {
