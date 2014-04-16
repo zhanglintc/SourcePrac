@@ -1,6 +1,19 @@
 ﻿#include "stdafx.h"
 #include "headers.h"
 
+void GetLocalIP()
+{
+	WSADATA data;
+	WSAStartup(2,&data);
+	hostent* host = gethostbyname("");
+ 
+	char *IP = inet_ntoa(*(struct in_addr*)*(host->h_addr_list));
+
+	printf("Local IP: %s\n",IP);
+ 
+	WSACleanup();
+}
+
 /*Soket Client Demo*/
 void SocketClient()
 {

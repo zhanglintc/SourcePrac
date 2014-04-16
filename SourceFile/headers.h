@@ -140,6 +140,7 @@ struct MAN
 //temporary
 void SocketServer();
 void SocketClient();
+void GetLocalIP();
 
 //void
 void CalcDate(int ,int ,int );
