@@ -14,16 +14,12 @@ char *StrConcatenate(char *str1, char *str2, ...)
 
 	while(str1[j]!='\0')
 	{
-		result_str[i]=str1[j];
-		i++;
-		j++;
+		result_str[i++]=str1[j++];
 	}
 	j=0;
 	while(str2[j]!='\0')
 	{
-		result_str[i]=str2[j];
-		i++;
-		j++;
+		result_str[i++]=str2[j++];
 	}
 	result_str[i]='\0';
 
