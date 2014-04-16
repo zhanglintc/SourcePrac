@@ -24,6 +24,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	Initialize();
 	//ControlDock();
 	//TwentyOnePointGame();
+	printf(StrConcatenate("a","b"));
 	gets(ch);
 	if(ch[0]=='s')
 	{

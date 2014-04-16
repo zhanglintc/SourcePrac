@@ -1,6 +1,34 @@
 ﻿#include "stdafx.h"
 #include "headers.h"
 
+char *StrConcatenate(char *str1, char *str2, ...)
+{
+	// va_list ap;
+	// va_arg(ap, char *)
+	// va_end(ap);
+	char* result_str;
+	int i=0;
+	int j=0;
+
+	result_str=(char *)malloc(sizeof(str1)+sizeof(str2));
+
+	while(str1[j]!='\0')
+	{
+		result_str[i]=str1[j];
+		i++;
+		j++;
+	}
+	j=0;
+	while(str2[j]!='\0')
+	{
+		result_str[i]=str2[j];
+		i++;
+		j++;
+	}
+	result_str[i]='\0';
+
+	return result_str;
+}
 
 /*******************************************************
 Function:

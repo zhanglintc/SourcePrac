@@ -141,6 +141,7 @@ struct MAN
 void SocketServer();
 void SocketClient();
 void GetLocalIP();
+char *StrConcatenate(char *str1, char *str2, ...);
 
 //void
 void CalcDate(int ,int ,int );
