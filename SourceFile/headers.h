@@ -141,7 +141,7 @@ struct MAN
 void SocketServer();
 void SocketClient();
 void GetLocalIP();
-char *StrConcatenate(int nums, ...);
+char *StrConcatenate(char *head, ...);
 char *Int2Str(int data);
 
 //void

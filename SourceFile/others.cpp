@@ -99,7 +99,7 @@ void SocketServer()
             char buffer[MAXBYTE]={0};
             recv(clientsocket, buffer, MAXBYTE, NULL);              //一直接收客户端socket的send操作
             printf("***Client***    %d: %s\n", i,buffer);
-            msg=StrConcatenate(3,"Your msg No.",Int2Str(i)," recived!\r\n");
+            msg=StrConcatenate("Your msg No.",Int2Str(i)," recived!\r\n","\0");
             send(clientsocket, msg, strlen(msg)+sizeof(char), NULL);
             if(Equal(buffer,"exit"))
             {

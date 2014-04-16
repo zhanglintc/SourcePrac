@@ -3,16 +3,18 @@
 
 /*******************************************************
 Function:
-		Concatenate several string.			
+		Concatenate several string. If you only pass thoes
+		strings you want to be concatenated sometimes is OK. 
+		But if you set the last parameter as "\0" to would be better.
 Arguement:
-	int amount:
-		numbers of string to concatenate
+	char haed:
+		first string to be concatenated, nothing special
 	...:
-		strings to be concatenated
+		other strings to be concatenated
 Return:
 	char *: concatenated string
 *******************************************************/
-char *StrConcatenate(int amount, ...)
+char *StrConcatenate(char *head, ...)
 {
 	int i = 0;			//result string index
 	int j = 0;			//individual string index
@@ -21,16 +23,23 @@ char *StrConcatenate(int amount, ...)
 	char *result_str;	//result
 	va_list ap;			//...
 
-	va_start(ap, amount);								//start ap
 	result_str = (char *)malloc(100 * sizeof(char *));	//initial result_str (100 char* spaces)
+	va_start(ap, head);									//start ap
 
-	for(times=0; times<amount; times++)					//concatenate
+	while(head[j] != '\0')								//copy first string to result string
 	{
-		in_str = va_arg(ap, char *);					//get next string
+		result_str[i++] = head[j++];
+	}
+	j = 0;												//individual index clean
 
-		while(in_str[j] != '\0')						//to the end
+	while(in_str = va_arg(ap, char *))					//while next parameter exsist
+	{
+		 if(Equal(in_str,"\0"))							//if end mark "\0" occured
+		 	break;										//then break
+
+		while(in_str[j] != '\0')						//copy other string to result string
 		{
-			result_str[i++] = in_str[j++];				//copy input string to result string
+			result_str[i++] = in_str[j++];
 		}
 
 		j = 0;											//individual index clean
