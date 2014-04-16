@@ -20,11 +20,21 @@
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	char ch[10];
 	Initialize();
 	//ControlDock();
 	//TwentyOnePointGame();
-	//SocketServer();
-	GetLocalIP();
+	gets(ch);
+	if(ch[0]=='s')
+	{
+		SocketServer();
+	}
+	else if(ch[0]=='c')
+	{
+		SocketClient();
+	}
+	else;
+	//GetLocalIP();
 	
 /********************************************************************************************/
 /********************************************************************************************/

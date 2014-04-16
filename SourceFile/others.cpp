@@ -17,7 +17,7 @@ void GetLocalIP()
 /*Soket Client Demo*/
 void SocketClient()
 {
-    Sleep(2000);                        //沉睡2秒再连接server
+    Sleep(200);                        //沉睡0.2秒再连接server
 
     WSADATA wsaData;
     WSAStartup(MAKEWORD(2, 2), &wsaData);
@@ -33,18 +33,29 @@ void SocketClient()
 
     char buffer[MAXBYTE]={0};
     recv(s, buffer, MAXBYTE, NULL);
-    printf("***SERVER***%s", buffer);
+    printf("***SERVER***: %s", buffer);
+    printf("You can chat with server now:\n");
 
     while(TRUE)
     {
         char* mymsg=new char[100000];
-        printf("You can chat with server now:\n");
+        //printf("You can chat with server now:\n");
         gets(mymsg);
         send(s, mymsg, strlen(mymsg)+sizeof(char), NULL);
         /*
            recv函数中的bufferlength参数是可以固定值的
            send函数中的bufferlength参数不能固定值，需要看实际长度，并且考虑到'\0'字符串
         */
+        memset(buffer,0,sizeof(buffer));
+        recv(s, buffer, MAXBYTE, NULL);
+        if(strlen(buffer)!=0)
+        {
+            printf("***SERVER***: %s", buffer);
+        }
+        else
+        {
+            printf("Server dead\n");
+        }
     }
 
     closesocket(s);
@@ -54,6 +65,7 @@ void SocketClient()
 /*Soket Server Demo*/
 void SocketServer()
 {
+    int i=0;
     WSADATA wsaData;
     WSAStartup(MAKEWORD(2, 2), &wsaData);
 
@@ -86,10 +98,18 @@ void SocketServer()
         {
             char buffer[MAXBYTE]={0};
             recv(clientsocket, buffer, MAXBYTE, NULL);              //一直接收客户端socket的send操作
-            printf("***Client***    %s\n", buffer);
+            printf("***Client***    %d: %s\n", i,buffer);
+            msg="Your msg recived!\r\n";
+            send(clientsocket, msg, strlen(msg)+sizeof(char), NULL);
+            if(Equal(buffer,"exit"))
+            {
+                break;
+            }
+            i++;
         }
 
         closesocket(clientsocket);                                  //关闭socket
+        break;
     }
 
     closesocket(s);                                                 //关闭监听socket    
