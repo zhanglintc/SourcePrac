@@ -19,6 +19,9 @@ somewhere else and test it.
 	Each function may has no relationship.
 	Each time I want to I want to test something,
 	I add a new function to here.
+	
+4.others.cpp:
+	Some obsoleted functions here.
 
 4.header.h:
 	All the declarations and destinations.
