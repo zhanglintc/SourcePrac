@@ -56,6 +56,10 @@ void SocketClient()
         {
             printf("Server dead\n");
         }
+        if(Equal(mymsg,"exit"))
+        {
+            closesocket(s);
+        }
     }
 
     closesocket(s);
@@ -101,15 +105,15 @@ void SocketServer()
             printf("***Client***    %d: %s\n", i,buffer);
             msg=StrConcatenate("Your msg No.",Int2Str(i)," recived!\r\n","\0");
             send(clientsocket, msg, strlen(msg)+sizeof(char), NULL);
-            if(Equal(buffer,"exit"))
+            if(Equal(buffer,"exit") || strlen(buffer)==0)
             {
                 break;
             }
             i++;
         }
 
-        closesocket(clientsocket);                                  //关闭socket
-        break;
+        //closesocket(clientsocket);                                  //关闭socket
+        //break;
     }
 
     closesocket(s);                                                 //关闭监听socket    
