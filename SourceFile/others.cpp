@@ -126,12 +126,7 @@ void monthshow(char i)
     char **p;
     char *s[]={"January","February","March"};
     p=s;
-    //printf("%d\n%d\n%c\n",s,*s,**s);
-    //printf("%d\n",**p);
-    //for(int i=0;i<3;i++)
-    {
-        printf("%s\n",*(p+i-1));
-    }
+    printf("%s\n",*(p+i-1));
 }
 
 /*******************************************************
