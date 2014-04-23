@@ -18,6 +18,33 @@
 //-----theodolite-----
 //2014.03.20 ZhangLin -E
 //commit
+class Time
+{
+public:
+	Time()
+	{
+		this->day=3;
+	}
+
+	Time(int in)
+	{
+		this->day=in;
+	}
+
+	void set_time(Time &t)
+	{
+		this->day=1;
+	}
+
+	void show_time()
+	{
+	printf("%d",this->day);
+	}
+private:
+	int day;
+};
+
+
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -25,6 +52,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	Initialize();
 	//ControlDock();
 	//TwentyOnePointGame();
+	Time *t1=new Time(99);
+	//t1.set_time(t1);
+	t1->show_time();
 	gets(ch);
 	if(ch[0]=='s')
 	{
@@ -35,7 +65,9 @@ int _tmain(int argc, _TCHAR* argv[])
 		SocketClient();
 	}
 	else;
+	{
 		GetLocalIP();
+	}
 	
 /********************************************************************************************/
 /********************************************************************************************/
