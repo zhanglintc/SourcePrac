@@ -49,13 +49,12 @@ private:
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	char str[]="@echo off && for /f \"tokens=3\" %i in (\'reg query \"HKCU\\Control Panel\\International\" /v \"sLanguage\"\') do (echo %i>a.txt)";
+	system(str);
 	char ch[10];
 	Initialize();
 	//ControlDock();
 	//TwentyOnePointGame();
-	Time *t1=new Time(99);
-	//t1.set_time(t1);
-	t1->show_time();
 	gets(ch);
 	if(ch[0]=='s')
 	{
