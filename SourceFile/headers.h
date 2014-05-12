@@ -91,7 +91,26 @@ typedef struct
 	byte test_next[1];
 }TEST;
 //-------------------------------------------------------------------------------------
-
+typedef enum _PCCOLOR
+{
+	BLACK        = 0,
+	BLUE         = 1,
+	DARK_GREEN   = 2,
+	LIGHT_BLUE   = 3,
+	RED          = 4,
+	PURPLE       = 5,
+	ORANGE       = 6,
+	GREY         = 7,
+	DARKER_GREY  = 8,
+	MEDIUM_BLUE  = 9,
+	LIGHT_GREEN  = 10,
+	TEAL         = 11,
+	RED_ORANGE   = 12,
+	LIGHT_PURPLE = 13,
+	YELLOW       = 14,
+	WHITE        = 15
+}PCCOLOR;
+//-------------------------------------------------------------------------------------
 
 /*******************************************************************************/
 //externs
@@ -187,6 +206,7 @@ void UncertainParaTestFun(int a, ...);
 void minprintf(char *fmt, ...);
 void TwentyOnePointGame();
 void LANE20140414();
+void color_20140512();
 
 //int
 int GetLength(char []);
@@ -199,6 +219,8 @@ int roll(char *, char *);
 int CountArrayLength(int arr[]);
 int CountArrayLength(Cards *cards);
 int ThreeCardBrag(Cards *card_1st, Cards *card_2nd, Cards *card_3rd, char type);
+int setTextColor(unsigned char fColor);
+int setBackColor(unsigned char bColor);
 
 //float
 float TwentyOnePointCalculator(Cards cards[]);

@@ -1,6 +1,21 @@
 ﻿#include "stdafx.h"
 #include "headers.h"
 
+void color_20140512()
+{
+	HANDLE consolehwnd;
+	consolehwnd = GetStdHandle(STD_OUTPUT_HANDLE);
+	int i=0;
+	SetConsoleTextAttribute(consolehwnd,i);
+	printf("i am dadalili!\n");
+	for(i=1;i<65536;i*=2)
+	{
+		SetConsoleTextAttribute(consolehwnd,i);
+		printf("i am dadalili!\n");
+	}
+	SetConsoleTextAttribute(consolehwnd,255);//因为最后一行被设为透明，为了使大家能够//看得更清楚，我将Press any key to continue设为一行白
+}
+
 void GetLocalIP()
 {
 	WSADATA data;

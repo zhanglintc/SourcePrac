@@ -49,6 +49,7 @@ private:
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	setTextColor(12);
 	char str[]="@echo off && for /f \"tokens=3\" %i in (\'reg query \"HKCU\\Control Panel\\International\" /v \"sLanguage\"\') do (echo %i>a.txt)";
 	system(str);
 	char ch[10];

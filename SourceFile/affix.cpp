@@ -1,6 +1,22 @@
 ﻿#include "stdafx.h"
 #include "headers.h"
 
+/*设置字体颜色*/
+int setTextColor(unsigned char fColor)
+{
+	HANDLE hd = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_SCREEN_BUFFER_INFO csbInfo;
+	GetConsoleScreenBufferInfo(hd, &csbInfo);
+	return SetConsoleTextAttribute(hd, fColor | (csbInfo.wAttributes&~0x0F));
+}
+/*设置背景颜色*/
+int setBackColor(unsigned char bColor)
+{
+	HANDLE hd = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_SCREEN_BUFFER_INFO csbInfo;
+	GetConsoleScreenBufferInfo(hd, &csbInfo);
+	return SetConsoleTextAttribute(hd, (bColor << 4) | (csbInfo.wAttributes&~0xF0));
+}
 /*******************************************************
 Function:
 		Concatenate several string. If you only pass thoes
