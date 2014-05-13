@@ -19,39 +19,8 @@
 //2014.03.20 ZhangLin -E
 //commit
 
-class Time
-{
-public:
-	Time()
-	{
-		this->day=3;
-	}
-
-	Time(int in)
-	{
-		this->day=in;
-	}
-
-	void set_time(Time &t)
-	{
-		this->day=1;
-	}
-
-	void show_time()
-	{
-	printf("%d",this->day);
-	}
-private:
-	int day;
-};
-
-
-
 int _tmain(int argc, _TCHAR* argv[])
 {
-	setTextColor(12);
-	char str[]="@echo off && for /f \"tokens=3\" %i in (\'reg query \"HKCU\\Control Panel\\International\" /v \"sLanguage\"\') do (echo %i>a.txt)";
-	system(str);
 	char ch[10];
 	Initialize();
 	//ControlDock();
@@ -75,6 +44,7 @@ int _tmain(int argc, _TCHAR* argv[])
 /****************************  Below is the end mark  ***************************************/
 /********************************************************************************************/
 /********************************************************************************************/
+	setTextColor(TEAL);
 	printf("\n\n\n");
 	printf("********Test over*********\n");
 	printf("Press any key to exit...\n");
