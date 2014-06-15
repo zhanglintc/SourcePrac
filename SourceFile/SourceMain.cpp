@@ -18,6 +18,7 @@
 //-----theodolite-----
 //2014.03.20 ZhangLin -E
 //commit
+//
 
 int _tmain(int argc, _TCHAR* argv[])
 {
