@@ -17,7 +17,6 @@
 //roll   16 resulted 5
 //-----theodolite-----
 //2014.03.20 ZhangLin -E
-//commit
 //Happy birthday!!! 2014.06.23 --Lane to myself
 
 int _tmain(int argc, _TCHAR* argv[])
