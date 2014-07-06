@@ -18,7 +18,7 @@
 //-----theodolite-----
 //2014.03.20 ZhangLin -E
 //Happy birthday!!! 2014.06.23 --Lane to myself
-//
+////
 
 int _tmain(int argc, _TCHAR* argv[])
 {
