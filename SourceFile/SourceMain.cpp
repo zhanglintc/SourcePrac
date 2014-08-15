@@ -24,9 +24,33 @@
 int _tmain(int argc, _TCHAR* argv[])
 {
 	char ch[10];
+	int lst[] = {1,1};
+	ListNode *head = new ListNode(0);
+	ListNode *pt = head;
+	ListNode *node = NULL;
+
 	Initialize();
 	//ControlDock();
-	//TwentyOnePointGame();
+	//TwentyOnePointGame();\
+	
+	for(int i=0;i<2;i++)
+	{
+		node = new ListNode(lst[i]);
+		if(head->next == NULL)
+		{
+			head->next = node;
+		}
+		else
+		{
+			pt->next = node;
+		}
+		pt = pt->next;
+	}
+
+	pt = head->next;
+
+	insertionSortList(pt);
+
 	gets(ch);
 	if(ch[0]=='s')
 	{

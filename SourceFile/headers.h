@@ -151,6 +151,13 @@ struct MAN
 	MAN *next;
 };
 //-------------------------------------------------------------------------------------
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+//-------------------------------------------------------------------------------------
+
 
 /*******************************************************************************/
 //functions
@@ -162,6 +169,7 @@ void SocketClient();
 void GetLocalIP();
 char *StrConcatenate(char *head, ...);
 char *Int2Str(int data);
+ListNode *insertionSortList(ListNode *head);
 
 //void
 void CalcDate(int ,int ,int );
