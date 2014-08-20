@@ -37,13 +37,14 @@ ListNode *insertionSortList(ListNode *head)
                 {
                     pt_cache = pt_cache->next;
                     pt_currt = pt_currt->next;
-					head = head->next;
                     continue;
                 }
             }
-            pt_cache->next = head;
-			if(head != NULL)
+
+            if(pt_currt == NULL)
 			{
+                pt_cache->next = head;
+                head = head->next;
 				pt_cache->next->next = NULL;
 			}
         }
