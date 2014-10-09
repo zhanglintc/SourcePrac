@@ -30,9 +30,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	ListNode *node = NULL;
 
 	Initialize();
-	//ControlDock();
-	//TwentyOnePointGame();\
-	
+	ControlDock();
+	//TwentyOnePointGame();
+	int data[] = {1,2,3};
+	Arrangement(data, 3, 'd');
 	for(int i=0;i<2;i++)
 	{
 		node = new ListNode(lst[i]);
