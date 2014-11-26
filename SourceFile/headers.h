@@ -62,7 +62,7 @@
 //typedefs
 /*******************************************************************************/
 //-------------------------------------------------------------------------------------
-typedef struct
+typedef struct Cards
 {
 	int  uni_num;				// 0-53 for All
 								// 0-12 for Spade
@@ -78,12 +78,12 @@ typedef struct
 	char point_str[10];			//stringfor Ace,2,3,4,5,6,7,8,9,10,Jack,Queen,King
 }Cards;
 //-------------------------------------------------------------------------------------
-typedef struct
+typedef struct K_MSG
 {
 	byte abData[64];
 }K_MSG;
 //-------------------------------------------------------------------------------------
-typedef struct
+typedef struct TEST
 {
 	byte test1_1:4;
 	byte test1_2:4;
