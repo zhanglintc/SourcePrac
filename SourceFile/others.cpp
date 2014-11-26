@@ -1,6 +1,26 @@
 ﻿#include "stdafx.h"
 #include "headers.h"
 
+void SocketCaller()
+{
+	char ch[10];
+
+	gets(ch);
+
+	if(ch[0]=='s')
+	{
+		SocketServer();
+	}
+	else if(ch[0]=='c')
+	{
+		SocketClient();
+	}
+	else;
+	{
+		GetLocalIP();
+	}
+}
+
 ListNode *insertionSortList(ListNode *head)
 {
     ListNode *new_head = new ListNode(0);

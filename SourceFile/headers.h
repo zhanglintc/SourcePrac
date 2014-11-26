@@ -215,6 +215,7 @@ void minprintf(char *fmt, ...);
 void TwentyOnePointGame();
 void LANE20140414();
 void color_20140512();
+void SocketCaller();
 
 //int
 int GetLength(char []);

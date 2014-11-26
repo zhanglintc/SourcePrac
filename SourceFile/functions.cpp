@@ -872,9 +872,15 @@ void ControlDock(void)
 	{
 		printf("ControlDock>");													//Always prompt "ControlDock>"
 		GetCommand(command,para_1st,para_2nd);									//Then get the user's command
-		
+
+		//No input, do nothing, just show a new prompt
+		if( Equal(command,"") )
+		{
+			;
+		}
+
 		//Exit
-		if( Equal(command,"-exit") || Equal(command,"exit") )
+		else if( Equal(command,"-exit") || Equal(command,"exit") )
 		{
 			break;
 		}
@@ -885,13 +891,7 @@ void ControlDock(void)
 			system("cls");
 			printf("\n");  //2014.04.14 added
 		}
-		
-		//No input, do nothing, just show a new prompt
-		else if( Equal(command,"") )
-		{
-			;
-		}
-		
+
 		//Show user's help
 		else if( Equal(command,"-help") || Equal(command,"help") || Equal(command,"-?") || Equal(command,"/?") )
 		{
@@ -916,9 +916,16 @@ void ControlDock(void)
 			AB_Game();
 		}
 		
+		//Call lastone
 		else if( Equal(command,"lastone") )
 		{
 			CallLastOne();
+		}
+
+		//Play the 21 point game
+		else if( Equal(command,"21game") )
+		{
+			TwentyOnePointGame();
 		}
 		
 		//Not match any case, re-input
@@ -937,10 +944,13 @@ Return	:None
 *******************************************************/
 void help(void)
 {
-	puts("-exit	exit");
 	puts("-help -? /?");
 	puts("-roll xxx");
-	puts("-word word\n");
+	puts("21game");
+	puts("abgame");
+	puts("lastone");
+	puts("-word word");
+	puts("-exit	exit\n");
 }
 
 /*******************************************************
