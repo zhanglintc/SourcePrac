@@ -3,22 +3,22 @@
 
 void SocketCaller()
 {
-	char ch[10];
+    char ch[10];
 
-	gets(ch);
+    gets(ch);
 
-	if(ch[0]=='s')
-	{
-		SocketServer();
-	}
-	else if(ch[0]=='c')
-	{
-		SocketClient();
-	}
-	else;
-	{
-		GetLocalIP();
-	}
+    if(ch[0]=='s')
+    {
+        SocketServer();
+    }
+    else if(ch[0]=='c')
+    {
+        SocketClient();
+    }
+    else;
+    {
+        GetLocalIP();
+    }
 }
 
 ListNode *insertionSortList(ListNode *head)
@@ -62,11 +62,11 @@ ListNode *insertionSortList(ListNode *head)
             }
 
             if(pt_currt == NULL)
-			{
+            {
                 pt_cache->next = head;
                 head = head->next;
-				pt_cache->next->next = NULL;
-			}
+                pt_cache->next->next = NULL;
+            }
         }
     }
     return new_head->next;
@@ -74,30 +74,30 @@ ListNode *insertionSortList(ListNode *head)
 
 void color_20140512()
 {
-	HANDLE consolehwnd;
-	consolehwnd = GetStdHandle(STD_OUTPUT_HANDLE);
-	int i=0;
-	SetConsoleTextAttribute(consolehwnd,i);
-	printf("i am dadalili!\n");
-	for(i=1;i<65536;i*=2)
-	{
-		SetConsoleTextAttribute(consolehwnd,i);
-		printf("i am dadalili!\n");
-	}
-	SetConsoleTextAttribute(consolehwnd,255);//因为最后一行被设为透明，为了使大家能够//看得更清楚，我将Press any key to continue设为一行白
+    HANDLE consolehwnd;
+    consolehwnd = GetStdHandle(STD_OUTPUT_HANDLE);
+    int i=0;
+    SetConsoleTextAttribute(consolehwnd,i);
+    printf("i am dadalili!\n");
+    for(i=1;i<65536;i*=2)
+    {
+        SetConsoleTextAttribute(consolehwnd,i);
+        printf("i am dadalili!\n");
+    }
+    SetConsoleTextAttribute(consolehwnd,255);//因为最后一行被设为透明，为了使大家能够//看得更清楚，我将Press any key to continue设为一行白
 }
 
 void GetLocalIP()
 {
-	WSADATA data;
-	WSAStartup(2,&data);
-	hostent* host = gethostbyname("");
+    WSADATA data;
+    WSAStartup(2,&data);
+    hostent* host = gethostbyname("");
  
-	char *IP = inet_ntoa(*(struct in_addr*)*(host->h_addr_list));
+    char *IP = inet_ntoa(*(struct in_addr*)*(host->h_addr_list));
 
-	printf("Local IP: %s\n",IP);
+    printf("Local IP: %s\n",IP);
  
-	WSACleanup();
+    WSACleanup();
 }
 
 /*Soket Client Demo*/
