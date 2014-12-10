@@ -171,43 +171,43 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\SourceFile\affix.cpp"
+				RelativePath="..\src\affix.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\SourceFile\functions.cpp"
+				RelativePath="..\src\functions.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\SourceFile\headers.h"
+				RelativePath="..\src\headers.h"
 				>
 			</File>
 			<File
-				RelativePath=".\SourceFile\lex_1.cpp"
+				RelativePath="..\src\lex_1.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\SourceFile\lex_2.cpp"
+				RelativePath="..\src\lex_2.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\SourceFile\lex_3.cpp"
+				RelativePath="..\src\lex_3.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\SourceFile\others.cpp"
+				RelativePath="..\src\others.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\SourceFile\SourceMain.cpp"
+				RelativePath="..\src\SourceMain.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\SourceFile\stdafx.cpp"
+				RelativePath="..\src\stdafx.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\SourceFile\stdafx.h"
+				RelativePath="..\src\stdafx.h"
 				>
 			</File>
 		</Filter>
