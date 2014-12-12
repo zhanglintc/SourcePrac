@@ -179,35 +179,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\src\headers.h"
-				>
-			</File>
-			<File
-				RelativePath="..\src\lex_1.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\src\lex_2.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\src\lex_3.cpp"
+				RelativePath="..\src\main.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\src\others.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\src\SourceMain.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\src\stdafx.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\src\stdafx.h"
 				>
 			</File>
 		</Filter>
@@ -216,12 +192,28 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\src\headers.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
+			<File
+				RelativePath="..\res\lexicon_part_1.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\res\lexicon_part_2.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\res\lexicon_part_3.cpp"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

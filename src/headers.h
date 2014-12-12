@@ -4,7 +4,6 @@
 /*******************************************************************************/
 //includes
 /*******************************************************************************/
-#include "stdafx.h"
 #include <stdio.h>
 #include <math.h>
 #include <time.h>
@@ -12,6 +11,8 @@
 #include <stdarg.h>
 #include <winsock2.h>
 #include <windows.h>
+#include <iostream>
+#include <tchar.h>
 #pragma comment (lib, "ws2_32")         //socket库文件
 
 /*******************************************************************************/

@@ -1,4 +1,5 @@
-﻿#include "stdafx.h"
+﻿
+#pragma once
 
 char *lexicon90k_2[]={
 "exclusive",

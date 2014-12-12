@@ -1,6 +1,4 @@
-﻿#include "stdafx.h"
-#include "headers.h"
-
+﻿#include "headers.h"
 
 /*******************************************************
 Function:

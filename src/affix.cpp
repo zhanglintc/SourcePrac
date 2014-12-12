@@ -1,5 +1,4 @@
-﻿#include "stdafx.h"
-#include "headers.h"
+﻿#include "headers.h"
 
 /*设置字体颜色*/
 int setTextColor(unsigned char fColor)

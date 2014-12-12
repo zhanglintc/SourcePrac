@@ -1,6 +1,5 @@
 ﻿// SourceMain.cpp : Console application entry point
 
-#include "stdafx.h"
 #include "headers.h"
 
 #define _INTSIZEOF(n)   ( (sizeof(n) + sizeof(int) - 1) & ~(sizeof(int) - 1) )
@@ -21,7 +20,7 @@
 //Macbook Air!!! 2014.07.27 --Lane
 ////////////////////////////
 
-int _tmain(int argc, _TCHAR* argv[])
+int main(int argc)
 {
     Initialize();
     ControlDock();  
