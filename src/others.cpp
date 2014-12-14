@@ -126,7 +126,7 @@ void SocketClient()
         char* mymsg=new char[100000];
         //printf("You can chat with server now:\n");
         gets(mymsg);
-        send(s, mymsg, strlen(mymsg)+sizeof(char), NULL);
+        send(s, mymsg, (int)strlen(mymsg)+sizeof(char), NULL);
         /*
            recv函数中的bufferlength参数是可以固定值的
            send函数中的bufferlength参数不能固定值，需要看实际长度，并且考虑到'\0'字符串
@@ -180,7 +180,7 @@ void SocketServer()
         printf("***SYS***    New client touched.\n");
 
         char* msg="Hello, my client.\r\n";
-        send(clientsocket, msg, strlen(msg)+sizeof(char), NULL);    //这里的第三个参数要注意，是加了一个char长度的
+        send(clientsocket, msg, (int)strlen(msg)+sizeof(char), NULL);    //这里的第三个参数要注意，是加了一个char长度的
         printf("***SYS***    HELLO.\n");
 
         while(TRUE)
@@ -189,7 +189,7 @@ void SocketServer()
             recv(clientsocket, buffer, MAXBYTE, NULL);              //一直接收客户端socket的send操作
             printf("***Client***    %d: %s\n", i,buffer);
             msg=StrConcatenate("Your msg No.",Int2Str(i)," recived!\r\n","\0");
-            send(clientsocket, msg, strlen(msg)+sizeof(char), NULL);
+            send(clientsocket, msg, (int)strlen(msg)+sizeof(char), NULL);
             if(Equal(buffer,"exit") || strlen(buffer)==0)
             {
                 break;
