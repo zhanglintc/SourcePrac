@@ -23,7 +23,7 @@
 int main(int argc)
 {
     Initialize();
-    ControlDock();  
+    ControlDock();
     
     //SocketCaller();
 /********************************************************************************************/
