@@ -27,76 +27,102 @@ struct Point {
     Point(int a, int b) : x(a), y(b) {}
 };
 
+// code from wuhong...
 class Solution {
 public:
+    int maxnum;
     int maxPoints(vector<Point> &points) {
-        int max_counter = 0;    // final answer
-        int cur_counter = 0;    // temp answer
-        int this_point_max = 0; // max point on a line with out repeat point
-        int samePoint = 1;      // how many same point
-
-        map<pair<int, double>, int> counter;
-        pair<int, double> line;
-        double slope = 0;
-
+        if(points.size() == 0)
+            return 0;
         if(points.size() == 1)
             return 1;
-
         if(points.size() == 2)
             return 2;
-
-        for(int i = 0; i < points.size(); i++) {
-            for(int j = 0; j < points.size(); j++) {
-                // this point, jump over
-                if(i == j)
-                    continue;
-
-                // same point, samePoint++
-                if(points[i].x == points[j].x && points[i].y == points[j].y) {
-                    samePoint += 1;
-                    continue;
+        int count(0);
+        maxnum = 0;
+        while(1)
+        {
+            int distanceflag;
+            double lenght,lenght1,lenght2;
+            count = 2;
+            vector<Point>::reverse_iterator it1,it2,it3;
+            it1 = points.rbegin();
+            it2 = it1+1;
+            it3 = it2+1;
+            lenght = getdistance(it1->x,it1->y,it2->x,it2->y);
+            distanceflag = (it1->x - it2->x)>>31;
+            for( ;it2 != points.rend(); ++it2)
+            {
+                for( ; it3 != points.rend(); ++it3)
+                {
+                    lenght1 = getdistance(it1->x,it1->y,it3->x,it3->y);
+                    lenght2 = getdistance(it2->x,it2->y,it3->x,it3->y);
+                    if(isonline(lenght,lenght1,lenght2,checklenght(it3->x,it1->x,it2->x),distanceflag))
+                        ++count;
                 }
-
-                // vertical, special process
-                else if(points[i].x == points[j].x) {
-                    slope = (double)INT_MAX;
-                    line.first = i;
-                    line.second  = slope;
-                }
-
-                // other cases, not the same point
-                else {
-                    slope = (double)(points[i].y - points[j].y) / (double)(points[i].x - points[j].x);
-                    line.first = i;
-                    line.second  = slope;
-                }
-
-                // calculate the numbers of points on the same line
-                counter[line] = (counter.find(line) == counter.end() ? 0 : counter.find(line)->second) + 1;
-
-                // keep this_point_max as the max of this point
-                this_point_max = this_point_max > counter[line] ? this_point_max : counter[line];
             }
-
-            // calculate cur_counter
-            cur_counter = this_point_max + samePoint;
-
-            // update max_counter
-            max_counter = max_counter > cur_counter ? max_counter : cur_counter;
-
-            // reset this_point_max
-            this_point_max = 0;
-
-            // clean the counter
-            counter.clear();
-
-            // reset samePoint
-            samePoint = 1;
+            points.pop_back();
+            setmaxnum(count);
+            if(points.size() == 2)
+            break;
         }
-
-        return max_counter;
+        return maxnum;
+    }
+    inline int checklenght(int thispoint, int pointone, int pointtwo)
+    {
+        if((thispoint > pointone) && (thispoint > pointtwo))
+            return 1;
+        else if((thispoint < pointone) && (thispoint < pointtwo))
+            return -1;
+        else
+            return 0;
+    }
+    double getdistance(int x1, int y1, int x2, int y2)
+    {
+        int temp1,temp2;
+        temp1=square(x1-x2);
+        temp2=square(y1-y2);
+        return sqrt(temp1+temp2);
+    }
+    inline bool isonline(double &lenght,double &lenght1,double &lenght2,int lenghtflag, int flag)
+    {
+        bool rt;
+        switch(lenghtflag)
+        {
+            case -1:
+                if(flag == 0)
+                    return doubleequal((lenght+lenght2),lenght1);
+                else
+                    return doubleequal((lenght+lenght1),lenght2);
+            case 0:
+                return doubleequal((lenght1+lenght2),lenght);
+            case 1:
+                if(flag ==0)
+                    return doubleequal((lenght+lenght1),lenght2);
+                else
+                    return doubleequal((lenght+lenght2),lenght1);
+            
+            default:
+                return false;
+        }
+    }
+    inline void setmaxnum(int num)
+    {
+        if(num > maxnum)
+            maxnum = num;
+    }
+    inline int square(int num)
+    {
+        return num*num;
+    }
+    inline bool doubleequal(double num1, double num2)
+    {
+        if((num1 - num2)< 0.005)
+            return true;
+        else return false;
     }
 };
+
 int main(int argc)
 {
     //Initialize();
