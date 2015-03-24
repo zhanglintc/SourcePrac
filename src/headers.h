@@ -14,6 +14,7 @@
 #include <iostream>
 #include <tchar.h>
 #include <vector>
+#include <map>
 #pragma comment (lib, "ws2_32")         //socket库文件
 
 using namespace std;
