@@ -31,44 +31,59 @@ struct Point {
 class Solution {
 public:
     int maxnum;
+
     int maxPoints(vector<Point> &points) {
         if(points.size() == 0)
             return 0;
+
         if(points.size() == 1)
             return 1;
+
         if(points.size() == 2)
             return 2;
+
         int count(0);
         maxnum = 0;
+
         while(1)
         {
             int distanceflag;
-            double lenght,lenght1,lenght2;
+            double length, length1, length2;
             count = 2;
-            vector<Point>::reverse_iterator it1,it2,it3;
+            vector<Point>::reverse_iterator it1, it2, it3;
             it1 = points.rbegin();
-            it2 = it1+1;
-            it3 = it2+1;
-            lenght = getdistance(it1->x,it1->y,it2->x,it2->y);
-            distanceflag = (it1->x - it2->x)>>31;
-            for( ;it2 != points.rend(); ++it2)
+            it2 = it1 + 1;
+            it3 = it2 + 1;
+
+            length = getdistance(it1->x, it1->y, it2->x, it2->y);
+            distanceflag = (it1->x - it2->x) >> 31;
+
+            for( ; it2 != points.rend(); ++it2)
             {
                 for( ; it3 != points.rend(); ++it3)
                 {
-                    lenght1 = getdistance(it1->x,it1->y,it3->x,it3->y);
-                    lenght2 = getdistance(it2->x,it2->y,it3->x,it3->y);
-                    if(isonline(lenght,lenght1,lenght2,checklenght(it3->x,it1->x,it2->x),distanceflag))
+                    length1 = getdistance(it1->x, it1->y, it3->x, it3->y);
+                    length2 = getdistance(it2->x, it2->y, it3->x, it3->y);
+                    if(isonline(length, length1, length2, checklength(it3->x, it1->x, it2->x), distanceflag))
                         ++count;
                 }
             }
+
             points.pop_back();
             setmaxnum(count);
             if(points.size() == 2)
             break;
         }
+
         return maxnum;
     }
-    inline int checklenght(int thispoint, int pointone, int pointtwo)
+
+    /*
+    return  1: this point in right
+    return -1: this point in left
+    return  0: this point in middle
+    */
+    inline int checklength(int thispoint, int pointone, int pointtwo)
     {
         if((thispoint > pointone) && (thispoint > pointtwo))
             return 1;
@@ -77,49 +92,55 @@ public:
         else
             return 0;
     }
+
+    // distance of two point
     double getdistance(int x1, int y1, int x2, int y2)
     {
-        int temp1,temp2;
-        temp1=square(x1-x2);
-        temp2=square(y1-y2);
-        return sqrt(temp1+temp2);
+        double temp1, temp2;
+        temp1 = square(x1 - x2);
+        temp2 = square(y1 - y2);
+        return (double)sqrt(temp1 + temp2);
     }
-    inline bool isonline(double &lenght,double &lenght1,double &lenght2,int lenghtflag, int flag)
+
+    // 
+    inline bool isonline(double &length, double &length1, double &length2, int lengthType, int distanceflag)
     {
-        bool rt;
-        switch(lenghtflag)
+        switch(lengthType)
         {
             case -1:
-                if(flag == 0)
-                    return doubleequal((lenght+lenght2),lenght1);
+                if(distanceflag == 0)
+                    return doubleequal((length + length2), length1);
                 else
-                    return doubleequal((lenght+lenght1),lenght2);
+                    return doubleequal((length + length1), length2);
             case 0:
-                return doubleequal((lenght1+lenght2),lenght);
+                return doubleequal((length1 + length2), length);
             case 1:
-                if(flag ==0)
-                    return doubleequal((lenght+lenght1),lenght2);
+                if(distanceflag == 0)
+                    return doubleequal((length + length1), length2);
                 else
-                    return doubleequal((lenght+lenght2),lenght1);
+                    return doubleequal((length + length2), length1);
             
             default:
                 return false;
         }
     }
+
     inline void setmaxnum(int num)
     {
         if(num > maxnum)
             maxnum = num;
     }
-    inline int square(int num)
+
+    // square of two num
+    inline double square(int num)
     {
-        return num*num;
+        return (double)num * num;
     }
+
+    // check two double equals or not
     inline bool doubleequal(double num1, double num2)
     {
-        if((num1 - num2)< 0.005)
-            return true;
-        else return false;
+        return ((num1 - num2) < 0.0000005 ? true : false);
     }
 };
 
