@@ -23,8 +23,8 @@
 int main(int argc)
 {
     Initialize();
-	// ControlDock();
-    ShellExecute(NULL, _T("open"), _T("explorer.exe"), _T("http://www.baidu.com"), NULL, SW_SHOW);
+	ControlDock();
+    //ShellExecute(NULL, _T("open"), _T("explorer.exe"), _T("http://www.baidu.com"), NULL, SW_SHOW);
 
     //SocketCaller();
 /********************************************************************************************/
