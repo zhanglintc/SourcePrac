@@ -1234,18 +1234,17 @@ void LastOne(int peoples,int number)//peoples is people's numbers, number is the
         else
         {
             p_this->next=p_new;             //add the new one to the end of the list
-            p_cache=p_this;                 //use p_cache back up the current place
             p_this=p_new;                   //then jump to the new one
         }
     }
-    
+
+    p_cache=p_this;                         //use p_cache back up the current place
     p_this->next=head;                      //to make it a circle
     p_this=head;                            //from the start
-    i=0;                                    //reset the counter
+    i=1;                                    //reset the counter
     
     while(1)
     {
-        i++;
         printf("I'm No.%-3d %-2d times\n",p_this->num,( i%number )+( i%number==0 ? number : 0 ));   //report current person's number
         if(i%number==0)//kill this person
         {
@@ -1260,6 +1259,7 @@ void LastOne(int peoples,int number)//peoples is people's numbers, number is the
             p_cache=p_this;
             p_this=p_this->next;
         }
+        i++;
         if(p_this->next==p_this)break;                                                              //only one person remains
     }
 
