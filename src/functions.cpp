@@ -167,13 +167,13 @@ void TwentyOnePointGame()
     printf("---------");
 
     i=1;    //Player request card
-    gets(input);
+    cin >> input;
     while(input[0]!='n' && TwentyOnePointCalculator(Player_Cards)<=21)      //while not 'n' && point is no more than 21
     {
         Player_Cards[i]=CardGenerator(Available_List, NOJOKER);
         printf("Card %d: %-7s %s", i,Player_Cards[i].suit_str, Player_Cards[i].point_str);
         i++;
-        gets(input);
+        cin >> input;
     }
     //printf("\nLast point: %.1f\n",TwentyOnePointCalculator(Player_Cards));    //debug print Player's value
 
@@ -658,11 +658,11 @@ void AB_Game()
             printf("Round %d:(last chance)\n",i);
         }
         
-        gets(input);                            //get the input
+        cin >> input;                            //get the input
         while(!AB_GameInputCheck(input))        //check the input is valid or not
         {
             printf("Invalid input\n");
-            gets(input);
+            cin >> input;
         }
         
         Guess=Str2Int(input);                   //string to int
