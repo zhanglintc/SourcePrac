@@ -20,7 +20,7 @@
 //Macbook Air!!! 2014.07.27 --Lane
 ////////////////////////////////////////////
 
-int main(int argc)
+int main(int argc, char *argv[])
 {
     Initialize();
 	ControlDock();
