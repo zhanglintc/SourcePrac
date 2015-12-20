@@ -4,6 +4,7 @@ head = headers.h
 
 SourcePractice: $(obj)
 	g++ -o SourcePractice $(obj)
+	rm *.o
 
 others.o: $(head)
 	g++ -c others.cpp
