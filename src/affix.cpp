@@ -400,16 +400,17 @@ int Factorial(int data)
 
 /*******************************************************
 Function:
-    count length of array. elements of array must 
-    be pointer or int or char or something length less 
-    than 4. arr is a pointer, point to int, length 4.
-    length of pointer is 4, too. thus this function 
-    can count an array which elements are pointers.
-    (the comment above is not correct -- 2014.04.14 zhanglin)
+    arr[] is an array which stores pointers. So we set
+    it's type as intptr_t. Once i move forward one step
+    and *(arr + i) exists, we confirmed this pointer
+    pointed a data, we make this pointer counted.
+    
+    -- update at 2015.12.20 by zhanglin
+
 Arguement:int *
 Return:length
 *******************************************************/
-int CountArrayLength(intptr_t arr[])    //point to 4 length datas
+int CountArrayLength(intptr_t arr[])        //point to 4 length datas
 {
     int i = 0;
     for(i = 0; *(arr + i); i++);            //if arr[i] contains things, i++
