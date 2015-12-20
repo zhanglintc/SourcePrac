@@ -822,32 +822,32 @@ void DateCalcMain()
     char StrIn[10];
     int year=0,month=0,day=0;
     printf("Please input year:");
-    scanf("%s",&StrIn);
+    scanf("%s", StrIn);
     getchar();
     while(CheckData(StrIn, (char *)"year", year,month, day) == false)
     {
         printf("Please input year:");
-        scanf("%s",&StrIn);
+        scanf("%s", StrIn);
         getchar();
     }
     year=Str2Int(StrIn);
     printf("Please input month:");
-    scanf("%s",&StrIn);
+    scanf("%s", StrIn);
     getchar();
     while(CheckData(StrIn, (char *)"month", year, month, day) == false)
     {
         printf("Please input month:");
-        scanf("%s",&StrIn);
+        scanf("%s", StrIn);
         getchar();
     }
     month=Str2Int(StrIn);
     printf("Please input day:");
-    scanf("%s",&StrIn);
+    scanf("%s", StrIn);
     getchar();
     while(CheckData(StrIn, (char *)"day", year, month, Str2Int(StrIn)) == false)
     {
         printf("Please input day:");
-        scanf("%s",&StrIn);
+        scanf("%s", StrIn);
         getchar();
     }
     day=Str2Int(StrIn);
