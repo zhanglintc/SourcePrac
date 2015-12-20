@@ -1,5 +1,6 @@
 ﻿#include "headers.h"
 
+#ifdef WIN32
 void SocketCaller()
 {
     char ch[10];
@@ -19,6 +20,7 @@ void SocketCaller()
         GetLocalIP();
     }
 }
+#endif //WIN32
 
 ListNode *insertionSortList(ListNode *head)
 {
@@ -71,6 +73,7 @@ ListNode *insertionSortList(ListNode *head)
     return new_head->next;
 }
 
+#ifdef WIN32
 void color_20140512()
 {
     HANDLE consolehwnd;
@@ -85,7 +88,9 @@ void color_20140512()
     }
     SetConsoleTextAttribute(consolehwnd,255);//因为最后一行被设为透明，为了使大家能够//看得更清楚，我将Press any key to continue设为一行白
 }
+#endif //WIN32
 
+#ifdef WIN32
 void GetLocalIP()
 {
     WSADATA data;
@@ -98,7 +103,9 @@ void GetLocalIP()
  
     WSACleanup();
 }
+#endif //WIN32
 
+#ifdef WIN32
 /*Soket Client Demo*/
 void SocketClient()
 {
@@ -150,7 +157,9 @@ void SocketClient()
     closesocket(s);
     WSACleanup();
 }
+#endif //WIN32
 
+#ifdef WIN32
 /*Soket Server Demo*/
 void SocketServer()
 {
@@ -205,6 +214,7 @@ void SocketServer()
     WSACleanup();                                                   //卸载
     getchar();
 }
+#endif //WIN32
 
 void monthshow(char i)
 {

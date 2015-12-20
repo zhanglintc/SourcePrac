@@ -9,13 +9,16 @@
 #include <time.h>
 #include <limits.h>
 #include <stdarg.h>
-#include <winsock2.h>
-#include <windows.h>
 #include <iostream>
-#include <tchar.h>
 #include <vector>
 #include <map>
+
+#ifdef WIN32
+#include <tchar.h>
+#include <winsock2.h>
+#include <windows.h>
 #pragma comment (lib, "ws2_32")         //socket库文件
+#endif
 
 using namespace std;
 
@@ -169,9 +172,11 @@ struct ListNode {
 /*******************************************************************************/
 
 //temporary
+#ifdef WIN32
 void SocketServer();
 void SocketClient();
 void GetLocalIP();
+#endif //WIN32
 char *StrConcatenate(char *head, ...);
 char *Int2Str(int data);
 ListNode *insertionSortList(ListNode *head);
@@ -206,7 +211,7 @@ void filesth();
 void ControlDock(void);
 void help(void);
 void GetCommand(char command[300], char para_1st[300], char para_2nd[300]);
-void __stdcall Callwooords(void);
+void Callwooords(void);
 void Big_Little_Endian_Judge();
 void recursion();
 void AB_Game();
@@ -219,8 +224,10 @@ void UncertainParaTestFun(int a, ...);
 void minprintf(char *fmt, ...);
 void TwentyOnePointGame();
 void LANE20140414();
+#ifdef WIN32
 void color_20140512();
 void SocketCaller();
+#endif //WIN32
 
 //int
 int GetLength(char []);
@@ -233,8 +240,10 @@ int roll(char *, char *);
 int CountArrayLength(int arr[]);
 int CountArrayLength(Cards *cards);
 int ThreeCardBrag(Cards *card_1st, Cards *card_2nd, Cards *card_3rd, char type);
+#ifdef WIN32
 int setTextColor(unsigned char fColor);
 int setBackColor(unsigned char bColor);
+#endif //WIN32
 
 //float
 float TwentyOnePointCalculator(Cards cards[]);

@@ -1,5 +1,6 @@
 ﻿#include "headers.h"
 
+#ifdef WIN32
 /*设置字体颜色*/
 int setTextColor(unsigned char fColor)
 {
@@ -8,6 +9,9 @@ int setTextColor(unsigned char fColor)
     GetConsoleScreenBufferInfo(hd, &csbInfo);
     return SetConsoleTextAttribute(hd, fColor | (csbInfo.wAttributes&~0x0F));
 }
+#endif //WIN32
+
+#ifdef WIN32
 /*设置背景颜色*/
 int setBackColor(unsigned char bColor)
 {
@@ -16,6 +20,7 @@ int setBackColor(unsigned char bColor)
     GetConsoleScreenBufferInfo(hd, &csbInfo);
     return SetConsoleTextAttribute(hd, (bColor << 4) | (csbInfo.wAttributes&~0xF0));
 }
+#endif //WIN32
 /*******************************************************
 Function:
         Concatenate several string. If you only pass thoes

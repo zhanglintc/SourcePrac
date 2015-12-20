@@ -610,7 +610,9 @@ Return  :None
 *******************************************************/
 void Initialize()
 {
+#ifdef WIN32
     _tsetlocale(LC_ALL, L"CHS");        //set locale codepage (Chinese)
+#endif
     srand((unsigned)time(NULL));        //Random number seed initial, 2014.03.16 zhanglin
 }
 
@@ -752,7 +754,7 @@ Function    :Call woords() function
 Argument    :None
 Return      :None
 *******************************************************/
-void _stdcall Callwooords(void)
+void Callwooords(void)
 {
     char    word[30];                                                           //store the input word
     int     length=0;                                                           //store the required word length
