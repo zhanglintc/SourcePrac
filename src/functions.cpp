@@ -733,7 +733,7 @@ bool AB_GameInputCheck(char data[100])
         if((check<=0)||(check>9))return false;
         if((N1==N2)||(N1==N3)||(N1==N4))return false;
         if((N2==N3)||(N2==N4))return false;
-        if((N3==N4))return false;
+        if (N3==N4) return false;
     }
     else
     {
@@ -741,7 +741,7 @@ bool AB_GameInputCheck(char data[100])
         if((check<=0)||(check>9))return false;
         if((N1==N2)||(N1==N3)||(N1==N4))return false;
         if((N2==N3)||(N2==N4))return false;
-        if((N3==N4))return false;
+        if (N3==N4) return false;
     }
     return true;                                                //everything is OK, return true
 }
@@ -806,7 +806,7 @@ void Callwooords(void)
         else if( Equal(command, (char *)"ok") )                                              //start wooords. annulment
         {
             printf("please input letters:");
-            scanf("%s",&word);
+            scanf("%s", word);
             getchar();
 
             printf("please input length:");

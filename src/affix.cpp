@@ -51,9 +51,9 @@ char *StrConcatenate(char *head, ...)
     }
     j = 0;                                              //individual index clean
 
-    while(in_str = va_arg(ap, char *))                  //while next parameter exsist
+    while((in_str = va_arg(ap, char *)))                //while next parameter exsist
     {
-         if(Equal(in_str, (char *)"\0"))                         //if end mark "\0" occured
+         if(Equal(in_str, (char *)"\0"))                //if end mark "\0" occured
             break;                                      //then break
 
         while(in_str[j] != '\0')                        //copy other string to result string
