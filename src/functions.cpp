@@ -337,15 +337,15 @@ void CallLastOne()
         printf("ControlDock\\LastOne>(peoples,number)");                            //welcome words
         GetCommand(para_1st,para_2nd,para_3rd);                                     //get input
 
-        if( Equal(para_1st,"-exit") || Equal(para_1st,"exit") )                     //exit
+        if( Equal(para_1st, (char *)"-exit") || Equal(para_1st, (char *)"exit") )                     //exit
         {
             break;
         }
-        else if( Equal(para_1st,"") )                                               //invalid input
+        else if( Equal(para_1st, (char *)"") )                                               //invalid input
         {
             ;                                                                       //do nothing, out put another line
         }
-        else if( Equal(para_1st,"cls") || Equal(para_1st,"-cls") )                  //clean screen
+        else if( Equal(para_1st, (char *)"cls") || Equal(para_1st, (char *)"-cls") )                  //clean screen
         {
             system("cls");
         }
@@ -771,16 +771,16 @@ void Callwooords(void)
         printf("\nControlDock\\Wooords>(word,length,key)");                         //welcome words
         GetCommand(command,para_1st,para_2nd);                                      //get main command and parameters
 
-        if( Equal(command,"-exit") || Equal(command,"exit") )                       //exit
+        if( Equal(command, (char *)"-exit") || Equal(command, (char *)"exit") )                       //exit
         {
             break;
         }
-        else if( Equal(command,"") )                                                //invalid input
+        else if( Equal(command, (char *)"") )                                                //invalid input
         {
             //printf("Invalid input\n\n");  //2014.03.14 zhanglin make it invalid
             ;                               //2014.03.14 zhanglin do nothing
         }
-        else if( Equal(command,"-show") )                                           //show last input
+        else if( Equal(command, (char *)"-show") )                                           //show last input
         {
             if(word[0] )
             {
@@ -791,7 +791,7 @@ void Callwooords(void)
                 printf("%s\n",word);                                                //show
             }
         }
-        else if( Equal(command,"-last") )                                           //use the last input
+        else if( Equal(command, (char *)"-last") )                                           //use the last input
         {
             printf("please input length:");                                         //get the length
             scanf("%d",&length);
@@ -803,7 +803,7 @@ void Callwooords(void)
 
             wooords(word,length,keyword);                                           //call wooords
         }
-        else if( Equal(command,"ok") )                                              //start wooords. annulment
+        else if( Equal(command, (char *)"ok") )                                              //start wooords. annulment
         {
             printf("please input letters:");
             scanf("%s",&word);
@@ -821,7 +821,7 @@ void Callwooords(void)
             getchar();
 
         }
-        else if( Equal(command,"cls") || Equal(command,"-cls") )                    //clean screen
+        else if( Equal(command, (char *)"cls") || Equal(command, (char *)"-cls") )                    //clean screen
         {
             system("cls");
         }
@@ -871,56 +871,56 @@ void ControlDock(void)
         GetCommand(command,para_1st,para_2nd);                                  //Then get the user's command
 
         //No input, do nothing, just show a new prompt
-        if( Equal(command,"") )
+        if( Equal(command, (char *)"") )
         {
             ;
         }
 
         //Exit
-        else if( Equal(command,"-exit") || Equal(command,"exit") )
+        else if( Equal(command, (char *)"-exit") || Equal(command, (char *)"exit") )
         {
             break;
         }
         
         //Clean the screen
-        else if( Equal(command,"cls") || Equal(command,"-cls") )
+        else if( Equal(command, (char *)"cls") || Equal(command, (char *)"-cls") )
         {
             system("cls");
             printf("\n");  //2014.04.14 added
         }
 
         //Show user's help
-        else if( Equal(command,"-help") || Equal(command,"help") || Equal(command,"-?") || Equal(command,"/?") )
+        else if( Equal(command, (char *)"-help") || Equal(command, (char *)"help") || Equal(command, (char *)"-?") || Equal(command, (char *)"/?") )
         {
             help();
         }
         
         //Call DotA's roll function
-        else if( Equal(command,"-roll") || Equal(command,"roll") )
+        else if( Equal(command, (char *)"-roll") || Equal(command, (char *)"roll") )
         {
             roll(para_1st, para_2nd);
         }
         
         //Call iOS game woords' assistant function
-        else if( Equal(command,"-word") || Equal(command,"word") )
+        else if( Equal(command, (char *)"-word") || Equal(command, (char *)"word") )
         {
             Callwooords();
         }
         
         //Play the AB game
-        else if( Equal(command,"abgame") )
+        else if( Equal(command, (char *)"abgame") )
         {
             AB_Game();
         }
         
         //Call lastone
-        else if( Equal(command,"lastone") )
+        else if( Equal(command, (char *)"lastone") )
         {
             CallLastOne();
         }
 
         //Play the 21 point game
-        else if( Equal(command,"21game") )
+        else if( Equal(command, (char *)"21game") )
         {
             TwentyOnePointGame();
         }

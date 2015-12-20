@@ -219,7 +219,7 @@ void SocketServer()
 void monthshow(char i)
 {
     char **p;
-    char *s[]={"January","February","March"};
+    char *s[]={(char *)"January", (char *)"February", (char *)"March"};
     p=s;
     printf("%s\n",*(p+i-1));
 }
@@ -824,7 +824,7 @@ void DateCalcMain()
     printf("Please input year:");
     scanf("%s",&StrIn);
     getchar();
-    while(CheckData(StrIn,"year",year,month,day)==false)
+    while(CheckData(StrIn, (char *)"year", year,month, day) == false)
     {
         printf("Please input year:");
         scanf("%s",&StrIn);
@@ -834,7 +834,7 @@ void DateCalcMain()
     printf("Please input month:");
     scanf("%s",&StrIn);
     getchar();
-    while(CheckData(StrIn,"month",year,month,day)==false)
+    while(CheckData(StrIn, (char *)"month", year, month, day) == false)
     {
         printf("Please input month:");
         scanf("%s",&StrIn);
@@ -844,7 +844,7 @@ void DateCalcMain()
     printf("Please input day:");
     scanf("%s",&StrIn);
     getchar();
-    while(CheckData(StrIn,"day",year,month,Str2Int(StrIn))==false)
+    while(CheckData(StrIn, (char *)"day", year, month, Str2Int(StrIn)) == false)
     {
         printf("Please input day:");
         scanf("%s",&StrIn);
