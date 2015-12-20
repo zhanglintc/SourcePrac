@@ -65,6 +65,12 @@ using namespace std;
 #define uint                    unsigned int
 #define byte                    unsigned char
 
+#if __WORDSIZE == 32
+#define POINTER_SIZE                int32_t
+#elif __WORDSIZE == 64
+#define POINTER_SIZE                int64_t
+#endif
+
 
 /*******************************************************************************/
 //typedefs
@@ -237,7 +243,7 @@ int Str2Int(char *,int );
 int Factorial(int data);
 int randnum(int min,int max);
 int roll(char *, char *);
-int CountArrayLength(int arr[]);
+int CountArrayLength(POINTER_SIZE arr[]);
 int CountArrayLength(Cards *cards);
 int ThreeCardBrag(Cards *card_1st, Cards *card_2nd, Cards *card_3rd, char type);
 #ifdef WIN32

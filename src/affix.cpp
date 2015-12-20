@@ -409,10 +409,10 @@ Function:
 Arguement:int *
 Return:length
 *******************************************************/
-int CountArrayLength(int *arr)              //point to 4 length datas
+int CountArrayLength(POINTER_SIZE arr[])    //point to 4 length datas
 {
-    int i=0;
-    for(i=0;*(arr+i);i++);                  //if arr[i] contains things, i++
+    int i = 0;
+    for(i = 0; *(arr + i); i++);            //if arr[i] contains things, i++
     return i;
 }
 

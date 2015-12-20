@@ -268,9 +268,9 @@ void Sort_Str(char *data[10])
         if(length<GetLength(*p))
             length=/*length<*/GetLength(*p);
     }
-    for(i=0;i<CountArrayLength((int *)data);i++)        //from start to end circle
+    for(i=0;i<CountArrayLength((POINTER_SIZE *)data);i++)        //from start to end circle
     {
-        for(j=i+1;j<CountArrayLength((int *)data);j++)  //from i+1 to end
+        for(j=i+1;j<CountArrayLength((POINTER_SIZE *)data);j++)  //from i+1 to end
         {
             for(k=0;k<length;k++)                       //go through string
             {

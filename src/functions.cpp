@@ -993,9 +993,9 @@ void wooords(char *letters, int length, char keyword)
     in time.            zhanglin 2014.03.16
     ********************************************************/
     
-    int _90kLength_1=CountArrayLength((int *)lexicon90k_1);                                     //calculate 90k part 1
-    int _90kLength_2=CountArrayLength((int *)lexicon90k_2);                                     //calculate 90k part 2
-    int _90kLength_3=CountArrayLength((int *)lexicon90k_3);                                     //calculate 90k part 3
+    int _90kLength_1=CountArrayLength((POINTER_SIZE *)lexicon90k_1);                                     //calculate 90k part 1
+    int _90kLength_2=CountArrayLength((POINTER_SIZE *)lexicon90k_2);                                     //calculate 90k part 2
+    int _90kLength_3=CountArrayLength((POINTER_SIZE *)lexicon90k_3);                                     //calculate 90k part 3
     
     int i=0,j=0,k=0;                            //initialize i k j. 
                                                 //i for lexicon length circle.      (about 30k)
