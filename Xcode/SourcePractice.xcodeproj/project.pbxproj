@@ -10,7 +10,6 @@
 		3D8431611C268BC100B8B8AF /* affix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D84315B1C268BC100B8B8AF /* affix.cpp */; settings = {ASSET_TAGS = (); }; };
 		3D8431621C268BC100B8B8AF /* functions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D84315C1C268BC100B8B8AF /* functions.cpp */; settings = {ASSET_TAGS = (); }; };
 		3D8431631C268BC100B8B8AF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D84315E1C268BC100B8B8AF /* main.cpp */; settings = {ASSET_TAGS = (); }; };
-		3D8431641C268BC100B8B8AF /* makefile in Sources */ = {isa = PBXBuildFile; fileRef = 3D84315F1C268BC100B8B8AF /* makefile */; settings = {ASSET_TAGS = (); }; };
 		3D8431651C268BC100B8B8AF /* others.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D8431601C268BC100B8B8AF /* others.cpp */; settings = {ASSET_TAGS = (); }; };
 		3D84316C1C268D7500B8B8AF /* lexicon_part_1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D8431681C268D7500B8B8AF /* lexicon_part_1.cpp */; settings = {ASSET_TAGS = (); }; };
 		3D84316D1C268D7500B8B8AF /* lexicon_part_2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D8431691C268D7500B8B8AF /* lexicon_part_2.cpp */; settings = {ASSET_TAGS = (); }; };
@@ -35,7 +34,6 @@
 		3D84315C1C268BC100B8B8AF /* functions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = functions.cpp; path = ../src/functions.cpp; sourceTree = "<group>"; };
 		3D84315D1C268BC100B8B8AF /* headers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = headers.h; path = ../src/headers.h; sourceTree = "<group>"; };
 		3D84315E1C268BC100B8B8AF /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../src/main.cpp; sourceTree = "<group>"; };
-		3D84315F1C268BC100B8B8AF /* makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = makefile; path = ../src/makefile; sourceTree = "<group>"; };
 		3D8431601C268BC100B8B8AF /* others.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = others.cpp; path = ../src/others.cpp; sourceTree = "<group>"; };
 		3D8431681C268D7500B8B8AF /* lexicon_part_1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lexicon_part_1.cpp; path = ../res/lexicon_part_1.cpp; sourceTree = "<group>"; };
 		3D8431691C268D7500B8B8AF /* lexicon_part_2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lexicon_part_2.cpp; path = ../res/lexicon_part_2.cpp; sourceTree = "<group>"; };
@@ -85,7 +83,6 @@
 				3D84315C1C268BC100B8B8AF /* functions.cpp */,
 				3D84315D1C268BC100B8B8AF /* headers.h */,
 				3D84315E1C268BC100B8B8AF /* main.cpp */,
-				3D84315F1C268BC100B8B8AF /* makefile */,
 				3D8431601C268BC100B8B8AF /* others.cpp */,
 			);
 			name = src;
@@ -163,7 +160,6 @@
 				3D8431651C268BC100B8B8AF /* others.cpp in Sources */,
 				3D8431611C268BC100B8B8AF /* affix.cpp in Sources */,
 				3D8431621C268BC100B8B8AF /* functions.cpp in Sources */,
-				3D8431641C268BC100B8B8AF /* makefile in Sources */,
 				3D84316E1C268D7500B8B8AF /* lexicon_part_3.cpp in Sources */,
 				3D8431631C268BC100B8B8AF /* main.cpp in Sources */,
 				3D84316C1C268D7500B8B8AF /* lexicon_part_1.cpp in Sources */,
