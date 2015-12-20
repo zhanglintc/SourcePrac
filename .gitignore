@@ -225,3 +225,5 @@ pip-log.txt
 *.xcuserstate
 
 Xcode/SourcePractice.xcodeproj/xcuserdata/
+
+SourcePractice
