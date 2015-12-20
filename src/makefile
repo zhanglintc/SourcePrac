@@ -1,21 +1,29 @@
 
-obj = others.obj main.obj functions.obj affix.obj
+obj = others.o main.o functions.o affix.o lexicon_part_1.o lexicon_part_2.o lexicon_part_3.o
 head = headers.h
 
-ddAPP: $(obj)
-	g++ -o ddAPP $(obj)
+SourcePractice: $(obj)
+	g++ -o SourcePractice $(obj)
 
-others.obj: $(head)
+others.o: $(head)
 	g++ -c others.cpp
-main.obj: $(head)
+main.o: $(head)
 	g++ -c main.cpp
-functions.obj: $(head)
+functions.o: $(head)
 	g++ -c functions.cpp
-affix.obj: $(head)
+affix.o: $(head)
 	g++ -c affix.cpp
+lexicon_part_1.o: $(head)
+	g++ -c ../res/lexicon_part_1.cpp
+lexicon_part_2.o: $(head)
+	g++ -c ../res/lexicon_part_2.cpp
+lexicon_part_3.o: $(head)
+	g++ -c ../res/lexicon_part_3.cpp
 
 
-.PHONY: clean
+.PHONY: clean start
 clean:
-	rm *.obj
+	rm *.o
+start:
+	./SourcePractice
 
