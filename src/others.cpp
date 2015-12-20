@@ -231,17 +231,17 @@ Return  :None
 *******************************************************/
 void ball()
 {
-    long double height=10000;
-    long double distance=0;
-    int i=0;
-    for(i=1;i<=10;i++)
+    double height = 10000;
+    double distance = 0;
+    int i = 0;
+    for(i = 1; i<= 10; i++)
     {
-        height/=2;
-        printf("%d is: %10gm\n",i,height);
-        distance+=2*height;
+        height /= 2;
+        printf("%d is: %10gm\n", i, height);
+        distance += 2 * height;
     }
-    distance+=height;
-    printf("distance is: %gm\n",distance);
+    distance += height;
+    printf("distance is: %gm\n", distance);
 }
 
 /*******************************************************
@@ -414,11 +414,11 @@ Return  :None
 void ptrsth()
 {
     int (*p)[4];
-    int score[][4]={{60,70,80,90},{56,89,67,88},{37,78,90,66}};
-    p=score;
-    printf("%d\n",sizeof(p[4]));
-//  printf("%d\n",p);
-//  printf("%d\n",p+1);
+    int score[][4] = {{60, 70, 80, 90}, {56, 89, 67, 88}, {37, 78, 90, 66}};
+    p = score;
+    printf("%d\n", (int)sizeof(p[4]));
+//  printf("%d\n", p);
+//  printf("%d\n", p+1);
     getchar();
 }
 
@@ -430,26 +430,25 @@ Return  :None
 void filesth()
 {
     FILE *fp;
-    uchar ch;
-    if((fp=fopen("test_input_file.txt","rb"))==NULL)
+    uchar c;
+    if((fp = fopen("test_input_file.txt", "rb")) == NULL)
     {
-        printf("error\n");
+        printf("Error: no such file\n");
     }
     else
     {
-        printf("OK\n");
+        printf("OK: file open success\n");
     }
-    //fputs(ch,fp);
-    //fprintf(fp,"\n");
-    ch=fgetc(fp);
-    while(1)
+    //fputs(ch, fp);
+    //fprintf(fp, "\n");
+    while(true)
     {
-        printf("%x %d\n",ch,sizeof(ch));
-        ch=fgetc(fp);
+        c = fgetc(fp);
+        if(c == 0xff)break;
+        printf("%x %d", c, (int)sizeof(c)); // print the hexadecimal type of the file content
         getchar();
     }
     fclose(fp);
-    getchar();
 }
 
 /*******************************************************
