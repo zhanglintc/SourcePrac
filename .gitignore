@@ -3,6 +3,9 @@ lexicon_part_1.cpp
 lexicon_part_2.cpp
 lexicon_part_3.cpp
 
+/Xcode/Build/
+/Xcode/DerivedData/
+
 #################
 ## Eclipse
 #################
