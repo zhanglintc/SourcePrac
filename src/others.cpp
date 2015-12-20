@@ -231,8 +231,7 @@ Return  :None
 *******************************************************/
 void ball()
 {
-    register long double height=10000;
-    long double last=0;
+    long double height=10000;
     long double distance=0;
     int i=0;
     for(i=1;i<=10;i++)
@@ -894,7 +893,7 @@ bool CheckData(char data[],char type[10],int year,int month,int day)
             return false;
         }
     }
-    if(type=="year")
+    if(!strcmp(type, "year"))
     {
         if (GetLength(data)>4)
         {
@@ -903,7 +902,7 @@ bool CheckData(char data[],char type[10],int year,int month,int day)
         }
         isLeapYear(Str2Int(data));
     }
-    if(type=="month")
+    if(!strcmp(type, "month"))
     {
         if (GetLength(data)>2)
         {
@@ -916,7 +915,7 @@ bool CheckData(char data[],char type[10],int year,int month,int day)
             return false;
         }
     }
-    if(type=="day")
+    if(!strcmp(type, "day"))
     {
         if (GetLength(data)>2)
         {

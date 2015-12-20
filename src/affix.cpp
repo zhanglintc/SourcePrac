@@ -38,7 +38,6 @@ char *StrConcatenate(char *head, ...)
 {
     int i = 0;          //result string index
     int j = 0;          //individual string index
-    int times = 0;      //string counter
     char *in_str;       //input string pointer
     char *result_str;   //result
     va_list ap;         //...
@@ -353,7 +352,6 @@ Return      :int
 int randnum(int min,int max)
 {
     if(max<min)Exchange(&min,&max);
-    int i=0;
     int randnum=0;
     randnum=rand()%(max-min+1)+min;
     return randnum;

@@ -450,9 +450,7 @@ Return:
 bool isStraight(Cards *card_1st, Cards *card_2nd, Cards *card_3rd)
 {
     bool is_straight=false;
-    int _1st=0,_2nd=0,_3rd=0;
     int seq[3];
-    int i=0,j=0;
     
     seq[0]=card_1st->point_int;
     seq[1]=card_2nd->point_int;
@@ -536,7 +534,6 @@ Return:
 *******************************************************/
 int ThreeCardBrag(Cards *card_1st, Cards *card_2nd, Cards *card_3rd, char type)
 {
-    int i=0;            //for loop
     int times=0;        //for times to generate one type
     bool isDone=false;  //for finished judgment
     
