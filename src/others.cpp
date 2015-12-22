@@ -5,7 +5,7 @@ void SocketCaller()
 {
     char ch[10];
 
-    cin >> ch;
+    gets(ch);
 
     if(ch[0]=='s')
     {
@@ -132,7 +132,7 @@ void SocketClient()
     {
         char* mymsg=new char[100000];
         //printf("You can chat with server now:\n");
-        cin >> mymsg;
+        gets(mymsg);
         send(s, mymsg, (int)strlen(mymsg)+sizeof(char), NULL);
         /*
            recv函数中的bufferlength参数是可以固定值的

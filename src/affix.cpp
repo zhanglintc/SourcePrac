@@ -177,7 +177,7 @@ void GetCommand(char command[COMMAND_STR_LEN], char para_1st[COMMAND_STR_LEN], c
     memset(para_1st,'\0',COMMAND_STR_LEN);                  //initialize parameter 1st
     memset(para_2nd,'\0',COMMAND_STR_LEN);                  //initialize parameter 2nd
 
-    cin >> input;                                           //get the input
+    gets(input);                                            //get the input
     input[INPUT_STRING_LEN-1]='\0';                         //set the last one as \0 (after input initial ' 'to \0 and uniformization, seems useless 2014.03.15)
 //-------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------
