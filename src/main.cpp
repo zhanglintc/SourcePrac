@@ -24,7 +24,7 @@
 int main(int argc, char *argv[])
 {
     Initialize();
-	ControlDock();
+    ControlDock();
     //ShellExecute(NULL, _T("open"), _T("explorer.exe"), _T("http://www.baidu.com"), NULL, SW_SHOW);
 
     //SocketCaller();
